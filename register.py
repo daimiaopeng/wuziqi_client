@@ -20,6 +20,9 @@ class Register(QWidget, register_ui.Ui_Form):
         client_register.passwd = self.lineEdit_2.text()
         passwd2 = self.lineEdit_3.text()
 
+        while True:
+            pass
+
         if client_register.passwd != passwd2:
             QMessageBox.warning(self, '警告', '两次输入的密码不一致', QMessageBox.Ok)
             return

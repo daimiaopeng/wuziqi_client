@@ -6,7 +6,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -16,7 +15,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\nbase.proto\"\x10\n\x03\x63md\x12\t\n\x01\x63\x18\x01 \x01(\x05\";\n\x16\x63lient_gobang_position\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\t\n\x01x\x18\x02 \x01(\x05\x12\t\n\x01y\x18\x03 \x01(\x05\";\n\x16server_gobang_position\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\t\n\x01x\x18\x02 \x01(\x05\x12\t\n\x01y\x18\x03 \x01(\x05\"=\n\x0c\x63lient_login\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x0e\n\x06passwd\x18\x03 \x01(\t\";\n\x0cserver_login\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\r\n\x05token\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t\"@\n\x0f\x63lient_register\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x0e\n\x06passwd\x18\x03 \x01(\t\"B\n\x0fserver_register\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x11\n\tisSuccess\x18\x02 \x01(\x05\x12\x0f\n\x07message\x18\x03 \x01(\t\"#\n\x04test\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0e\n\x06inform\x18\x02 \x01(\tb\x06proto3'
+    serialized_pb=b'\n\nbase.proto\"\x10\n\x03\x63md\x12\t\n\x01\x63\x18\x01 \x01(\x05\";\n\x16\x63lient_gobang_position\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\t\n\x01x\x18\x02 \x01(\x05\x12\t\n\x01y\x18\x03 \x01(\x05\";\n\x16server_gobang_position\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\t\n\x01x\x18\x02 \x01(\x05\x12\t\n\x01y\x18\x03 \x01(\x05\"=\n\x0c\x63lient_login\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x0e\n\x06passwd\x18\x03 \x01(\t\";\n\x0cserver_login\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\r\n\x05token\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t\"@\n\x0f\x63lient_register\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x0e\n\x06passwd\x18\x03 \x01(\t\"B\n\x0fserver_register\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x11\n\tisSuccess\x18\x02 \x01(\x05\x12\x0f\n\x07message\x18\x03 \x01(\t\"7\n\x12\x63lient_create_game\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x14\n\x0cwithUsername\x18\x02 \x01(\t\"2\n\x13server_online_infor\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0e\n\x06people\x18\x02 \x03(\t\"1\n\x12server_game_invite\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0e\n\x06people\x18\x02 \x01(\t\"/\n\x12\x63lient_game_invite\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04\x63ode\x18\x02 \x01(\x05\"1\n\x14server_game_isInvite\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04\x63ode\x18\x02 \x01(\x05\"#\n\x04test\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0e\n\x06inform\x18\x02 \x01(\tb\x06proto3'
 )
 
 _CMD = _descriptor.Descriptor(
@@ -48,6 +47,7 @@ _CMD = _descriptor.Descriptor(
   serialized_start=14,
   serialized_end=30,
 )
+
 
 _CLIENT_GOBANG_POSITION = _descriptor.Descriptor(
   name='client_gobang_position',
@@ -93,6 +93,7 @@ _CLIENT_GOBANG_POSITION = _descriptor.Descriptor(
   serialized_end=91,
 )
 
+
 _SERVER_GOBANG_POSITION = _descriptor.Descriptor(
   name='server_gobang_position',
   full_name='server_gobang_position',
@@ -136,6 +137,7 @@ _SERVER_GOBANG_POSITION = _descriptor.Descriptor(
   serialized_start=93,
   serialized_end=152,
 )
+
 
 _CLIENT_LOGIN = _descriptor.Descriptor(
   name='client_login',
@@ -181,6 +183,7 @@ _CLIENT_LOGIN = _descriptor.Descriptor(
   serialized_end=215,
 )
 
+
 _SERVER_LOGIN = _descriptor.Descriptor(
   name='server_login',
   full_name='server_login',
@@ -224,6 +227,7 @@ _SERVER_LOGIN = _descriptor.Descriptor(
   serialized_start=217,
   serialized_end=276,
 )
+
 
 _CLIENT_REGISTER = _descriptor.Descriptor(
   name='client_register',
@@ -269,6 +273,7 @@ _CLIENT_REGISTER = _descriptor.Descriptor(
   serialized_end=342,
 )
 
+
 _SERVER_REGISTER = _descriptor.Descriptor(
   name='server_register',
   full_name='server_register',
@@ -303,25 +308,210 @@ _SERVER_REGISTER = _descriptor.Descriptor(
   nested_types=[],
   enum_types=[
   ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=344,
-  serialized_end=410,
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+    ],
+    serialized_start=344,
+    serialized_end=410,
+)
+
+_CLIENT_CREATE_GAME = _descriptor.Descriptor(
+    name='client_create_game',
+    full_name='client_create_game',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='cmd', full_name='client_create_game.cmd', index=0,
+            number=1, type=5, cpp_type=1, label=1,
+            has_default_value=False, default_value=0,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='withUsername', full_name='client_create_game.withUsername', index=1,
+            number=2, type=9, cpp_type=9, label=1,
+            has_default_value=False, default_value=b"".decode('utf-8'),
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+    ],
+    extensions=[
+    ],
+    nested_types=[],
+    enum_types=[
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+    ],
+    serialized_start=412,
+    serialized_end=467,
+)
+
+_SERVER_ONLINE_INFOR = _descriptor.Descriptor(
+    name='server_online_infor',
+    full_name='server_online_infor',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='cmd', full_name='server_online_infor.cmd', index=0,
+            number=1, type=5, cpp_type=1, label=1,
+            has_default_value=False, default_value=0,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='people', full_name='server_online_infor.people', index=1,
+            number=2, type=9, cpp_type=9, label=3,
+            has_default_value=False, default_value=[],
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+    ],
+    extensions=[
+    ],
+    nested_types=[],
+    enum_types=[
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+    ],
+    serialized_start=469,
+    serialized_end=519,
+)
+
+_SERVER_GAME_INVITE = _descriptor.Descriptor(
+    name='server_game_invite',
+    full_name='server_game_invite',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='cmd', full_name='server_game_invite.cmd', index=0,
+            number=1, type=5, cpp_type=1, label=1,
+            has_default_value=False, default_value=0,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='people', full_name='server_game_invite.people', index=1,
+            number=2, type=9, cpp_type=9, label=1,
+            has_default_value=False, default_value=b"".decode('utf-8'),
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+    ],
+    extensions=[
+    ],
+    nested_types=[],
+    enum_types=[
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+    ],
+    serialized_start=521,
+    serialized_end=570,
+)
+
+_CLIENT_GAME_INVITE = _descriptor.Descriptor(
+    name='client_game_invite',
+    full_name='client_game_invite',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='cmd', full_name='client_game_invite.cmd', index=0,
+            number=1, type=5, cpp_type=1, label=1,
+            has_default_value=False, default_value=0,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='code', full_name='client_game_invite.code', index=1,
+            number=2, type=5, cpp_type=1, label=1,
+            has_default_value=False, default_value=0,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+    ],
+    extensions=[
+    ],
+    nested_types=[],
+    enum_types=[
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+    ],
+    serialized_start=572,
+    serialized_end=619,
+)
+
+_SERVER_GAME_ISINVITE = _descriptor.Descriptor(
+    name='server_game_isInvite',
+    full_name='server_game_isInvite',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='cmd', full_name='server_game_isInvite.cmd', index=0,
+            number=1, type=5, cpp_type=1, label=1,
+            has_default_value=False, default_value=0,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='code', full_name='server_game_isInvite.code', index=1,
+            number=2, type=5, cpp_type=1, label=1,
+            has_default_value=False, default_value=0,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+    ],
+    extensions=[
+    ],
+    nested_types=[],
+    enum_types=[
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+    ],
+    serialized_start=621,
+    serialized_end=670,
 )
 
 _TEST = _descriptor.Descriptor(
-  name='test',
-  full_name='test',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='cmd', full_name='test.cmd', index=0,
+    name='test',
+    full_name='test',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='cmd', full_name='test.cmd', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -337,17 +527,17 @@ _TEST = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=412,
-  serialized_end=447,
+    nested_types=[],
+    enum_types=[
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+    ],
+    serialized_start=672,
+    serialized_end=707,
 )
 
 DESCRIPTOR.message_types_by_name['cmd'] = _CMD
@@ -357,62 +547,102 @@ DESCRIPTOR.message_types_by_name['client_login'] = _CLIENT_LOGIN
 DESCRIPTOR.message_types_by_name['server_login'] = _SERVER_LOGIN
 DESCRIPTOR.message_types_by_name['client_register'] = _CLIENT_REGISTER
 DESCRIPTOR.message_types_by_name['server_register'] = _SERVER_REGISTER
+DESCRIPTOR.message_types_by_name['client_create_game'] = _CLIENT_CREATE_GAME
+DESCRIPTOR.message_types_by_name['server_online_infor'] = _SERVER_ONLINE_INFOR
+DESCRIPTOR.message_types_by_name['server_game_invite'] = _SERVER_GAME_INVITE
+DESCRIPTOR.message_types_by_name['client_game_invite'] = _CLIENT_GAME_INVITE
+DESCRIPTOR.message_types_by_name['server_game_isInvite'] = _SERVER_GAME_ISINVITE
 DESCRIPTOR.message_types_by_name['test'] = _TEST
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 cmd = _reflection.GeneratedProtocolMessageType('cmd', (_message.Message,), {
-  'DESCRIPTOR': _CMD,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:cmd)
+    'DESCRIPTOR': _CMD,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:cmd)
 })
 _sym_db.RegisterMessage(cmd)
 
 client_gobang_position = _reflection.GeneratedProtocolMessageType('client_gobang_position', (_message.Message,), {
-  'DESCRIPTOR': _CLIENT_GOBANG_POSITION,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:client_gobang_position)
+    'DESCRIPTOR': _CLIENT_GOBANG_POSITION,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:client_gobang_position)
 })
 _sym_db.RegisterMessage(client_gobang_position)
 
 server_gobang_position = _reflection.GeneratedProtocolMessageType('server_gobang_position', (_message.Message,), {
-  'DESCRIPTOR': _SERVER_GOBANG_POSITION,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:server_gobang_position)
+    'DESCRIPTOR': _SERVER_GOBANG_POSITION,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:server_gobang_position)
 })
 _sym_db.RegisterMessage(server_gobang_position)
 
 client_login = _reflection.GeneratedProtocolMessageType('client_login', (_message.Message,), {
-  'DESCRIPTOR': _CLIENT_LOGIN,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:client_login)
+    'DESCRIPTOR': _CLIENT_LOGIN,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:client_login)
 })
 _sym_db.RegisterMessage(client_login)
 
 server_login = _reflection.GeneratedProtocolMessageType('server_login', (_message.Message,), {
-  'DESCRIPTOR': _SERVER_LOGIN,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:server_login)
+    'DESCRIPTOR': _SERVER_LOGIN,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:server_login)
 })
 _sym_db.RegisterMessage(server_login)
 
 client_register = _reflection.GeneratedProtocolMessageType('client_register', (_message.Message,), {
-  'DESCRIPTOR': _CLIENT_REGISTER,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:client_register)
+    'DESCRIPTOR': _CLIENT_REGISTER,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:client_register)
 })
 _sym_db.RegisterMessage(client_register)
 
 server_register = _reflection.GeneratedProtocolMessageType('server_register', (_message.Message,), {
-  'DESCRIPTOR': _SERVER_REGISTER,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:server_register)
+    'DESCRIPTOR': _SERVER_REGISTER,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:server_register)
 })
 _sym_db.RegisterMessage(server_register)
 
+client_create_game = _reflection.GeneratedProtocolMessageType('client_create_game', (_message.Message,), {
+    'DESCRIPTOR': _CLIENT_CREATE_GAME,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:client_create_game)
+})
+_sym_db.RegisterMessage(client_create_game)
+
+server_online_infor = _reflection.GeneratedProtocolMessageType('server_online_infor', (_message.Message,), {
+    'DESCRIPTOR': _SERVER_ONLINE_INFOR,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:server_online_infor)
+})
+_sym_db.RegisterMessage(server_online_infor)
+
+server_game_invite = _reflection.GeneratedProtocolMessageType('server_game_invite', (_message.Message,), {
+    'DESCRIPTOR': _SERVER_GAME_INVITE,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:server_game_invite)
+})
+_sym_db.RegisterMessage(server_game_invite)
+
+client_game_invite = _reflection.GeneratedProtocolMessageType('client_game_invite', (_message.Message,), {
+    'DESCRIPTOR': _CLIENT_GAME_INVITE,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:client_game_invite)
+})
+_sym_db.RegisterMessage(client_game_invite)
+
+server_game_isInvite = _reflection.GeneratedProtocolMessageType('server_game_isInvite', (_message.Message,), {
+    'DESCRIPTOR': _SERVER_GAME_ISINVITE,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:server_game_isInvite)
+})
+_sym_db.RegisterMessage(server_game_isInvite)
+
 test = _reflection.GeneratedProtocolMessageType('test', (_message.Message,), {
-  'DESCRIPTOR': _TEST,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:test)
+    'DESCRIPTOR': _TEST,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:test)
 })
 _sym_db.RegisterMessage(test)
 

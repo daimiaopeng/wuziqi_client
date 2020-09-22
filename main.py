@@ -6,9 +6,11 @@ import sys
 import socket
 import base_pb2
 import register
+import game
 
 
 # pyuic5 -o login_ui.py login.ui
+# pyuic5 -o main_ui.py main.ui
 # pyuic5 -o register_ui.py register.ui
 # pyinstaller -F --icon=ui.ico main.py --noconsole
 
@@ -26,7 +28,7 @@ class MyWindow(QMainWindow, login_ui.Ui_MainWindow):
         self.sock.readyRead.connect(self.readData)
         if not self.sock.waitForConnected(2500):
             msg = self.sock.errorString()
-            print(msg)
+            QMessageBox.warning(self, '警告', '服务器连接失败', QMessageBox.Ok)
         self.switch = {
             3: self.cmd3,
             5: self.cmd5,
@@ -38,9 +40,10 @@ class MyWindow(QMainWindow, login_ui.Ui_MainWindow):
         client_login.username = self.lineEdit.text()
         client_login.passwd = self.lineEdit_2.text()
         if client_login.username == "" and client_login.username == "":
-            QMessageBox.warning(self, "警告", "用户名或密码为空", QMessageBox.Ok)
+            QMessageBox.warning(self, '警告', '用户名或密码为空', QMessageBox.Ok)
             return
         wData = QByteArray(client_login.SerializeToString())
+        self.username = client_login.username
         self.writeData(wData)
 
     def register(self):
@@ -69,15 +72,19 @@ class MyWindow(QMainWindow, login_ui.Ui_MainWindow):
         s_l = base_pb2.server_login()
         s_l.ParseFromString(data)
         if s_l.token == "":
-            QMessageBox.warning(self, "警告", s_l.message, QMessageBox.Ok)
+            QMessageBox.warning(self, '警告', s_l.message, QMessageBox.Ok)
             return
         self.token = s_l.token
         print(self.token)
+        self.sock.readyRead.disconnect(self.readData)
+        self.g = game.PlayGame(self.sock, self.token, self.username)
+        self.g.show()
+        self.close()
 
     def cmd5(self, data):
         s_l = base_pb2.server_register()
         s_l.ParseFromString(data)
-        QMessageBox.warning(self, "警告", s_l.message, QMessageBox.Ok)
+        QMessageBox.warning(self, '警告', s_l.message, QMessageBox.Ok)
         if s_l.isSuccess == 0:
             return
         self.reg.close()
@@ -87,5 +94,7 @@ class MyWindow(QMainWindow, login_ui.Ui_MainWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     myWin = MyWindow()
+
     myWin.show()
+
     app.exec_()
