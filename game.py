@@ -43,6 +43,8 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         super().__init__(parent=parent)
         self.setupUi(self)
         self.sock = sock
+        self.isBeginGame = False
+        self.isCanXia = False
         self.username = username
         self.sock.readyRead.connect(self.readData)
         self.token = token
@@ -132,7 +134,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.backSignal.emit()
 
     def mouseReleaseEvent(self, a0: QtGui.QMouseEvent):
-        if self.gameStatu == False:
+        if self.gameStatu == False or self.isCanXia == False:
             return None
         print(a0.pos())
         print("x:", a0.x())
@@ -176,7 +178,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         if result != None:
             print(result + '赢了')
             self.showResult(result)
-
+        self.isCanXia = False
         # 自动落子
         # self.autoDown()
 
@@ -350,6 +352,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.sock.flush()
 
     def cmd7(self, data):
+        # 获取对方的棋子位置，并显示
         s_g_p = base_pb2.server_gobang_position()
         s_g_p.ParseFromString(data)
 
@@ -379,8 +382,11 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         if result != None:
             print(result + '赢了')
             self.showResult(result)
+            self.isBeginGame = False
+        self.isCanXia = True
 
     def cmd9(self, data):
+        # 显示在线用户列表
         s_o_i = base_pb2.server_online_infor()
         s_o_i.ParseFromString(data)
         print(s_o_i.people)
@@ -393,38 +399,58 @@ class PlayGame(QWidget, main_ui.Ui_Form):
     def cmd10(self, data):
         s_g_i = base_pb2.server_game_invite()
         s_g_i.ParseFromString(data)
-        print(s_g_i.people + '请求对战')
-
-        #         确定按钮
+        reply = QMessageBox.question(self, '提示', '"%s"请求对战' % s_g_i.people, QMessageBox.Yes | QMessageBox.No)
         c_g_i = base_pb2.client_game_invite()
         c_g_i.cmd = 11
-        c_g_i.code = 1
+        if reply == QMessageBox.Yes:
+            c_g_i.code = 1
+            self.isBeginGame = True
+        else:
+            c_g_i.code = 0
+            pass
         self.writeData(c_g_i.SerializeToString())
 
     def cmd12(self, data):
         s_g_i = base_pb2.server_game_isInvite()
         s_g_i.ParseFromString(data)
+        reply = ""
+        self.fightBox.close()
         if s_g_i.code == 1:
-            print("对方接受了请求")
+            reply = "对方接受了请求"
+            self.isBeginGame = True
+            self.isCanXia = True
         elif s_g_i.code == 0:
-            print("对方拒绝了请求")
+            reply = "对方拒绝了请求"
+
+        QMessageBox.information(self, '提示', reply, QMessageBox.Ok)
 
     def listViewClicked(self, qModelIndex):
+        if self.isBeginGame == True:
+            QMessageBox.information(self, '警告', '您正在游戏中', QMessageBox.Ok)
+            return
         self.withusername = self.peopleList[qModelIndex.row()]
         print(self.withusername)
-
         c_c_g = base_pb2.client_create_game()
         c_c_g.cmd = 8
         c_c_g.withUsername = self.withusername
         self.writeData(c_c_g.SerializeToString())
 
+        # 创建一个问答框，注意是Question
+        self.fightBox = QMessageBox(QMessageBox.Question, '对局请求中', '正在等待对方响应中...', parent=self)
+        # 添加按钮，可用中文
+        cancel = self.fightBox.addButton('取消对局', QMessageBox.YesRole)
+
+        # 设置消息框中内容前面的图标
+        self.fightBox.setIcon(1)
+
+        # 显示该问答框
+        self.fightBox.show()
+        if self.fightBox.clickedButton() == cancel:
+            self.fightBox.close()
+
 
 if __name__ == "__main__":
-    import cgitb
-
-    cgitb.enable("text")
     a = QApplication(sys.argv)
     m = PlayGame()
     m.show()
     sys.exit(a.exec_())
-    pass
