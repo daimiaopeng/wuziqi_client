@@ -1,3 +1,4 @@
+from PyQt5.QtGui import QKeySequence
 from PyQt5.QtNetwork import QTcpSocket
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -12,6 +13,8 @@ class Register(QWidget, register_ui.Ui_Form):
         self._login = _login
         self.setWindowTitle('五子棋')
         self.pushButton.clicked.connect(self.login)
+        self.pushButton.setShortcut(QKeySequence(Qt.Key_Enter))
+        self.pushButton.setShortcut(QKeySequence(Qt.Key_Return))
 
     def login(self):
         client_register = base_pb2.client_register()

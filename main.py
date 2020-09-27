@@ -1,3 +1,4 @@
+from PyQt5.QtGui import QKeySequence
 from PyQt5.QtNetwork import QTcpSocket
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -26,6 +27,9 @@ class MyWindow(QMainWindow, login_ui.Ui_MainWindow):
         self.sock = QTcpSocket(self)
         self.sock.connectToHost(self.ip, self.port)
         self.sock.readyRead.connect(self.readData)
+        self.pushButton.setShortcut(QKeySequence(Qt.Key_Enter))
+        self.pushButton.setShortcut(QKeySequence(Qt.Key_Return))
+
         if not self.sock.waitForConnected(2500):
             msg = self.sock.errorString()
             QMessageBox.warning(self, '警告', '服务器连接失败', QMessageBox.Ok)
