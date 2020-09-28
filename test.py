@@ -1,9 +1,9 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 import socket  # 导入 socket 模块
-import mess_pb2
+import base_pb2
 
-t = mess_pb2.test()
+t = base_pb2.test()
 t.cmd = 0
 t.inform = "hello"
 

@@ -60,7 +60,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         # img.scaled(self.label_2.size(), Qt.KeepAspectRatioByExpanding)
         # self.label_2.setScaledContents(True)
         # self.label_2.setPixmap(img)
-
+        self.comboBox.currentIndexChanged.connect(self.messageSend)
         self.listView.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.listView.clicked.connect(self.listViewClicked)
         self.pushButton.clicked.connect(self.messageSend)
@@ -75,7 +75,6 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.history = []
         self.history2 = []
         self.is_over = False
-
         self.lbl = None
 
         # self.lab = QLabel('背景图片', self)
@@ -355,9 +354,10 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.switch[cmd.c](readData.data())
 
     def writeData(self, data):
+        print("writeData")
         headerData = QByteArray()
         wData = QDataStream(headerData, QIODevice.WriteOnly)
-        wData.writeInt64(socket.htonl(len(data)))
+        wData.writeUInt32(socket.htonl(len(data)))
         self.sock.write(headerData + data)
         self.sock.waitForBytesWritten()
         self.sock.flush()
@@ -400,7 +400,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         # 显示在线用户列表
         s_o_i = base_pb2.server_online_infor()
         s_o_i.ParseFromString(data)
-        print(s_o_i.people)
+        # print(s_o_i.people)
         self.peopleList = s_o_i.people
         self.peopleList.remove(self.username)
         slm = QStringListModel()
@@ -449,7 +449,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
     def insertChatMessage(self, s):
         self.textBrowser.append(s)
         self.textBrowser.moveCursor(QTextCursor.End)
-        self.lineEdit.clear()
+        self.comboBox.lineEdit().clear()
 
     def listViewClicked(self, qModelIndex):
         if self.isBeginGame == True:
@@ -476,14 +476,14 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             self.fightBox.close()
 
     def messageSend(self):
-        if self.lineEdit.text() == "":
+        if self.comboBox.lineEdit().text() == "":
             return
         c_m = base_pb2.chatMessage()
         c_m.cmd = 13
         c_m.type = 1
         c_m.time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        c_m.data = self.lineEdit.text()
-        s = '<font color="#F9904A">我 %s </font> <br>%s' % (c_m.time, self.lineEdit.text())
+        c_m.data = self.comboBox.lineEdit().text()
+        s = '<font color="#F9904A">我 %s </font> <br>%s' % (c_m.time, self.comboBox.lineEdit().text())
         self.insertChatMessage(s)
         self.writeData(c_m.SerializeToString())
 

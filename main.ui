@@ -13,22 +13,22 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>760</width>
-        <height>650</height>
-    </rect>
-   </property>
-      <property name="text">
-          <string/>
-      </property>
-      <property name="pixmap">
-          <pixmap>source/游戏界面.png</pixmap>
-      </property>
-  </widget>
+     <widget class="QLabel" name="label">
+         <property name="geometry">
+             <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>760</width>
+                 <height>650</height>
+             </rect>
+         </property>
+         <property name="text">
+             <string/>
+         </property>
+         <property name="pixmap">
+             <pixmap>source/游戏界面.png</pixmap>
+         </property>
+     </widget>
      <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
              <rect>
@@ -48,7 +48,86 @@
              <item>
                  <layout class="QHBoxLayout" name="horizontalLayout">
                      <item>
-                         <widget class="QLineEdit" name="lineEdit"/>
+                         <widget class="QComboBox" name="comboBox">
+                             <property name="enabled">
+                                 <bool>true</bool>
+                             </property>
+                             <property name="tabletTracking">
+                                 <bool>false</bool>
+                             </property>
+                             <property name="editable">
+                                 <bool>true</bool>
+                             </property>
+                             <property name="currentText">
+                                 <string/>
+                             </property>
+                             <property name="currentIndex">
+                                 <number>-1</number>
+                             </property>
+                             <property name="insertPolicy">
+                                 <enum>QComboBox::NoInsert</enum>
+                             </property>
+                             <item>
+                                 <property name="text">
+                                     <string>大家好，很高兴见到各位！</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>快点吧，我等到花儿也谢了。</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>你的牌打得太好了！</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>我们交个朋友吧，能告诉我你的联系方法吗？</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>各位，真不好意思，我要离开一会。</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>又断线了，网络怎么这么差啊！</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>不要吵了，有什么好吵的，专心玩游戏吧。</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>你是MM，还是GG？</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>下次再玩吧，我要走了。</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>再见了，我会想念大家的。</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>和你合作真是太愉快啦。</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>不要走，决战到天亮。</string>
+                                 </property>
+                             </item>
+                         </widget>
                      </item>
                      <item>
                          <widget class="QLabel" name="label_2">
@@ -56,7 +135,7 @@
                                  <bool>true</bool>
                              </property>
                              <property name="text">
-                                 <string>TextLabel</string>
+                                 <string>TextL</string>
                              </property>
                          </widget>
                      </item>
