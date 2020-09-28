@@ -1,4 +1,5 @@
 import socket
+import time
 
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
@@ -53,10 +54,16 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             9: self.cmd9,
             10: self.cmd10,
             12: self.cmd12,
+            13: self.cmd13,
         }
+        # img = QPixmap('source/表情.png')
+        # img.scaled(self.label_2.size(), Qt.KeepAspectRatioByExpanding)
+        # self.label_2.setScaledContents(True)
+        # self.label_2.setPixmap(img)
 
         self.listView.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.listView.clicked.connect(self.listViewClicked)
+        self.pushButton.clicked.connect(self.messageSend)
         # 左上角chessboard[0][0]
         # 右上角chessboard[0][18]
         # 左下角chessboard[18][0]
@@ -126,6 +133,9 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.focusPoint = QLabel(self)
         self.focusPoint.setPixmap(QPixmap("source/标识.png"))
 
+        self.pushButton.setShortcut(QKeySequence(Qt.Key_Enter))
+        self.pushButton.setShortcut(QKeySequence(Qt.Key_Return))
+
     def goBack(self):
         self.backSignal.emit()
         self.close()
@@ -177,6 +187,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         result = self.isWin(self.chess)
         if result != None:
             print(result + '赢了')
+            self.isBeginGame = False
             self.showResult(result)
         self.isCanXia = False
         # 自动落子
@@ -346,7 +357,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
     def writeData(self, data):
         headerData = QByteArray()
         wData = QDataStream(headerData, QIODevice.WriteOnly)
-        wData.writeInt32(socket.htonl(len(data)))
+        wData.writeInt64(socket.htonl(len(data)))
         self.sock.write(headerData + data)
         self.sock.waitForBytesWritten()
         self.sock.flush()
@@ -424,6 +435,22 @@ class PlayGame(QWidget, main_ui.Ui_Form):
 
         QMessageBox.information(self, '提示', reply, QMessageBox.Ok)
 
+    def cmd13(self, data):
+        c_m = base_pb2.chatMessage()
+        c_m.ParseFromString(data)
+        messagetype = c_m.type
+        string = c_m.data
+        messageTime = c_m.time
+
+        s = '<font color=#F9904A>对手 %s </font> <br>%s' % (messageTime, string)
+        if messagetype == 1:  # 文字信息
+            self.insertChatMessage(s)
+
+    def insertChatMessage(self, s):
+        self.textBrowser.append(s)
+        self.textBrowser.moveCursor(QTextCursor.End)
+        self.lineEdit.clear()
+
     def listViewClicked(self, qModelIndex):
         if self.isBeginGame == True:
             QMessageBox.information(self, '警告', '您正在游戏中', QMessageBox.Ok)
@@ -447,6 +474,18 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.fightBox.show()
         if self.fightBox.clickedButton() == cancel:
             self.fightBox.close()
+
+    def messageSend(self):
+        if self.lineEdit.text() == "":
+            return
+        c_m = base_pb2.chatMessage()
+        c_m.cmd = 13
+        c_m.type = 1
+        c_m.time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        c_m.data = self.lineEdit.text()
+        s = '<font color="#F9904A">我 %s </font> <br>%s' % (c_m.time, self.lineEdit.text())
+        self.insertChatMessage(s)
+        self.writeData(c_m.SerializeToString())
 
 
 if __name__ == "__main__":
