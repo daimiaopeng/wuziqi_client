@@ -11,6 +11,7 @@ import base_pb2
 import button as MyButton
 from PyQt5.QtNetwork import QTcpSocket
 import main_ui
+import base64
 
 
 class Chessman(QLabel):
@@ -19,18 +20,18 @@ class Chessman(QLabel):
         self.color = color
         self.pic = None
         if self.color == "black":
-            self.pic = QPixmap("source/黑子.png")
+            self.pic = QPixmap("source/black.png")
         else:
-            self.pic = QPixmap("source/白子.png")
+            self.pic = QPixmap("source/white.png")
         self.setPixmap(self.pic)
         self.setFixedSize(self.pic.size())  # 设置棋子大小
         self.show()
-
+        self.parent = parent
         self.x = 0
         self.y = 0
 
     def move(self, a0: QtCore.QPoint):
-        super().move(a0.x() - 15, a0.y() - 15)
+        super().move(a0.x() + self.parent.label.x() - 18 - 4, a0.y() + self.parent.label.y() - 18 - 4)
 
     def setIndex(self, x, y):
         self.x = x
@@ -40,7 +41,7 @@ class Chessman(QLabel):
 class PlayGame(QWidget, main_ui.Ui_Form):
     backSignal = pyqtSignal()  # 返回信号
 
-    def __init__(self, sock, token, username, parent=None):
+    def __init__(self, sock, username, parent=None):
         super().__init__(parent=parent)
         self.setupUi(self)
         self.sock = sock
@@ -48,13 +49,13 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.isCanXia = False
         self.username = username
         self.sock.readyRead.connect(self.readData)
-        self.token = token
         self.switch = {
             7: self.cmd7,
             9: self.cmd9,
             10: self.cmd10,
             12: self.cmd12,
             13: self.cmd13,
+            14: self.cmd14,
         }
         # img = QPixmap('source/表情.png')
         # img.scaled(self.label_2.size(), Qt.KeepAspectRatioByExpanding)
@@ -101,7 +102,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
                                          'source/返回按钮_normal.png',
                                          'source/返回按钮_press.png',
                                          parent=self)
-        self.backBtn.move(650, 50)
+        self.backBtn.move(650, 22)
 
         self.startBtn = MyButton.MyButton('source/开始按钮_hover.png',
                                           'source/开始按钮_normal.png',
@@ -162,7 +163,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.history.append(self.chess)
         self.history2.append(self.focusPoint)
 
-        self.focusPoint.move(QPoint(pos.x() - 15, pos.y() - 15))
+        self.focusPoint.move(QPoint(pos.x() - 18 + self.label.x(), pos.y() + self.label.y() - 18))
         self.focusPoint.show()
         self.focusPoint.raise_()
 
@@ -194,15 +195,13 @@ class PlayGame(QWidget, main_ui.Ui_Form):
 
     # 坐标转换
     def reversePos(self, a0: QtCore.QPoint):
-        if a0.x() <= 50 - 15 or a0.x() >= 590 + 15 or a0.y() <= 50 - 15 or a0.y() >= 590 + 15:
+        if a0.x() <= self.label.x() + 4 or a0.x() >= self.label.x() + 517 + 18 or a0.y() <= self.label.y() + 4 or a0.y() >= self.label.y() + 517 + 18:
             return None, None
 
-        self.x = (a0.x() - 35) // 30
-        self.y = (a0.y() - 35) // 30
+        self.x = (a0.x() - self.label.x() - 4) // 36
+        self.y = (a0.y() - self.label.y() - 4) // 36
 
-        x = 50 + 30 * self.x
-        y = 50 + 30 * self.y
-        return QPoint(x, y), (self.x, self.y)
+        return QPoint(22 + self.x * 36, 22 + self.y * 36), (self.x, self.y)
 
     def isWin(self, chessman):
         print("in iswin,lastChessman:", chessman.color, chessman.x, chessman.y)
@@ -349,7 +348,10 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             return
 
         cmd = base_pb2.cmd()
-        cmd.ParseFromString(readData.data())
+        try:
+            cmd.ParseFromString(readData.data())
+        except:
+            pass
         print("cmd: %s" % cmd.c)
         self.switch[cmd.c](readData.data())
 
@@ -369,7 +371,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
 
         # 注意：x,y坐标对应
         chess_index = (s_g_p.y, s_g_p.x)  # 棋子在棋盘中的下标
-        pos = QPoint(50 + s_g_p.x * 30, 50 + s_g_p.y * 30)  # 棋子在棋盘中的坐标
+        pos = QPoint(22 + s_g_p.x * 36, 22 + s_g_p.y * 36)  # 棋子在棋盘中的坐标
 
         self.chessman = Chessman(color=self.turnChessColor, parent=self)
         self.chessman.setIndex(chess_index[1], chess_index[0])
@@ -377,7 +379,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.chessman.show()  # 显示棋子
 
         # 显示标识
-        self.focusPoint.move(QPoint(pos.x() - 15, pos.y() - 15))
+        self.focusPoint.move(QPoint(pos.x() - 18 + self.label.x(), pos.y() - 18 + self.label.y()))
         self.focusPoint.show()
         self.focusPoint.raise_()
 
@@ -445,6 +447,21 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         s = '<font color=#F9904A>对手 %s </font> <br>%s' % (messageTime, string)
         if messagetype == 1:  # 文字信息
             self.insertChatMessage(s)
+
+    def cmd14(self, data):
+        s_u_i = base_pb2.server_user_infor()
+        s_u_i.ParseFromString(data)
+        self.userGameInfor = s_u_i
+
+        s = """昵称:%-5s\n积分：%-5s  级别：%-5s\n总盘数：%-4s 游戏币：%-5s\n胜：%-5s 负：%-5s平：%-5s
+        """ % (
+            s_u_i.name, s_u_i.integral, s_u_i.level, s_u_i.numsGame, s_u_i.gameCurrency, s_u_i.win, s_u_i.lose,
+            s_u_i.draw)
+        img = QPixmap()
+        img.loadFromData(base64.b64decode(s_u_i.avatar))
+        self.label_11.setPixmap(img)
+        self.label_11.setScaledContents(True)
+        self.label_3.setText(s)
 
     def insertChatMessage(self, s):
         self.textBrowser.append(s)

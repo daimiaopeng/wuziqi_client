@@ -4,152 +4,259 @@
  <widget class="QWidget" name="Form">
   <property name="geometry">
    <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>1188</width>
-       <height>706</height>
+    <x>0</x>
+    <y>0</y>
+    <width>1254</width>
+    <height>805</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-     <widget class="QLabel" name="label">
-         <property name="geometry">
-             <rect>
-                 <x>0</x>
-                 <y>0</y>
-                 <width>760</width>
-                 <height>650</height>
-             </rect>
-         </property>
-         <property name="text">
-             <string/>
-         </property>
-         <property name="pixmap">
-             <pixmap>source/游戏界面.png</pixmap>
-         </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>100</y>
+     <width>540</width>
+     <height>540</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>source/chessboard.jpg</pixmap>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>850</x>
+     <y>10</y>
+     <width>91</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>头像</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>950</x>
+     <y>20</y>
+     <width>121</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>620</y>
+     <width>361</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QComboBox" name="comboBox">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="tabletTracking">
+       <bool>false</bool>
+      </property>
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+      <property name="currentText">
+       <string/>
+      </property>
+      <property name="currentIndex">
+       <number>-1</number>
+      </property>
+      <property name="insertPolicy">
+       <enum>QComboBox::NoInsert</enum>
+      </property>
+      <item>
+       <property name="text">
+        <string>大家好，很高兴见到各位！</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>快点吧，我等到花儿也谢了。</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>你的牌打得太好了！</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>我们交个朋友吧，能告诉我你的联系方法吗？</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>各位，真不好意思，我要离开一会。</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>又断线了，网络怎么这么差啊！</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>不要吵了，有什么好吵的，专心玩游戏吧。</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>你是MM，还是GG？</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>下次再玩吧，我要走了。</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>再见了，我会想念大家的。</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>和你合作真是太愉快啦。</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>不要走，决战到天亮。</string>
+       </property>
+      </item>
      </widget>
-     <widget class="QWidget" name="layoutWidget">
-         <property name="geometry">
-             <rect>
-                 <x>760</x>
-                 <y>0</y>
-                 <width>331</width>
-                 <height>651</height>
-             </rect>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-             <item>
-                 <widget class="QListView" name="listView"/>
-             </item>
-             <item>
-                 <widget class="QTextBrowser" name="textBrowser"/>
-             </item>
-             <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout">
-                     <item>
-                         <widget class="QComboBox" name="comboBox">
-                             <property name="enabled">
-                                 <bool>true</bool>
-                             </property>
-                             <property name="tabletTracking">
-                                 <bool>false</bool>
-                             </property>
-                             <property name="editable">
-                                 <bool>true</bool>
-                             </property>
-                             <property name="currentText">
-                                 <string/>
-                             </property>
-                             <property name="currentIndex">
-                                 <number>-1</number>
-                             </property>
-                             <property name="insertPolicy">
-                                 <enum>QComboBox::NoInsert</enum>
-                             </property>
-                             <item>
-                                 <property name="text">
-                                     <string>大家好，很高兴见到各位！</string>
-                                 </property>
-                             </item>
-                             <item>
-                                 <property name="text">
-                                     <string>快点吧，我等到花儿也谢了。</string>
-                                 </property>
-                             </item>
-                             <item>
-                                 <property name="text">
-                                     <string>你的牌打得太好了！</string>
-                                 </property>
-                             </item>
-                             <item>
-                                 <property name="text">
-                                     <string>我们交个朋友吧，能告诉我你的联系方法吗？</string>
-                                 </property>
-                             </item>
-                             <item>
-                                 <property name="text">
-                                     <string>各位，真不好意思，我要离开一会。</string>
-                                 </property>
-                             </item>
-                             <item>
-                                 <property name="text">
-                                     <string>又断线了，网络怎么这么差啊！</string>
-                                 </property>
-                             </item>
-                             <item>
-                                 <property name="text">
-                                     <string>不要吵了，有什么好吵的，专心玩游戏吧。</string>
-                                 </property>
-                             </item>
-                             <item>
-                                 <property name="text">
-                                     <string>你是MM，还是GG？</string>
-                                 </property>
-                             </item>
-                             <item>
-                                 <property name="text">
-                                     <string>下次再玩吧，我要走了。</string>
-                                 </property>
-                             </item>
-                             <item>
-                                 <property name="text">
-                                     <string>再见了，我会想念大家的。</string>
-                                 </property>
-                             </item>
-                             <item>
-                                 <property name="text">
-                                     <string>和你合作真是太愉快啦。</string>
-                                 </property>
-                             </item>
-                             <item>
-                                 <property name="text">
-                                     <string>不要走，决战到天亮。</string>
-                                 </property>
-                             </item>
-                         </widget>
-                     </item>
-                     <item>
-                         <widget class="QLabel" name="label_2">
-                             <property name="enabled">
-                                 <bool>true</bool>
-                             </property>
-                             <property name="text">
-                                 <string>TextL</string>
-                             </property>
-                         </widget>
-                     </item>
-                     <item>
-                         <widget class="QPushButton" name="pushButton">
-                             <property name="text">
-                                 <string>发送</string>
-                             </property>
-                         </widget>
-                     </item>
-                 </layout>
-             </item>
-         </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_2">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="text">
+       <string>TextL</string>
+      </property>
+      <property name="buddy">
+       <cstring>pushButton</cstring>
+      </property>
      </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>发送</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QListView" name="listView">
+   <property name="geometry">
+    <rect>
+     <x>850</x>
+     <y>130</y>
+     <width>256</width>
+     <height>192</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser">
+   <property name="geometry">
+    <rect>
+     <x>850</x>
+     <y>350</y>
+     <width>256</width>
+     <height>192</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>650</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>悔棋</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>650</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>和棋</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>650</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>开始</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_5">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>650</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>认输</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_6">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>650</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>设置</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

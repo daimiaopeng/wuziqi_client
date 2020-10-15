@@ -75,13 +75,11 @@ class MyWindow(QMainWindow, login_ui.Ui_MainWindow):
     def cmd3(self, data):
         s_l = base_pb2.server_login()
         s_l.ParseFromString(data)
-        if s_l.token == "":
+        if s_l.isSuccess == 0:
             QMessageBox.warning(self, '警告', s_l.message, QMessageBox.Ok)
             return
-        self.token = s_l.token
-        print(self.token)
         self.sock.readyRead.disconnect(self.readData)
-        self.g = game.PlayGame(self.sock, self.token, self.username)
+        self.g = game.PlayGame(self.sock, self.username)
         self.g.show()
         self.close()
 
