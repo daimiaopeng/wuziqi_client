@@ -1,41 +1,10 @@
 import socket
 import time
-
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5 import *
-import sys
 import base_pb2
 import button as MyButton
-from PyQt5.QtNetwork import QTcpSocket
 import main_ui
 import base64
-
-
-class Chessman(QLabel):
-    def __init__(self, color="black", parent=None):
-        super().__init__(parent)
-        self.color = color
-        self.pic = None
-        if self.color == "black":
-            self.pic = QPixmap("source/black.png")
-        else:
-            self.pic = QPixmap("source/white.png")
-        self.setPixmap(self.pic)
-        self.setFixedSize(self.pic.size())  # 设置棋子大小
-        self.show()
-        self.parent = parent
-        self.x = 0
-        self.y = 0
-
-    def move(self, a0: QtCore.QPoint):
-        super().move(a0.x() + self.parent.label.x() - 18 - 4, a0.y() + self.parent.label.y() - 18 - 4)
-
-    def setIndex(self, x, y):
-        self.x = x
-        self.y = y
+from chessman import *
 
 
 class PlayGame(QWidget, main_ui.Ui_Form):
@@ -56,7 +25,12 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             12: self.cmd12,
             13: self.cmd13,
             14: self.cmd14,
+            15: self.cmd15,
         }
+        self.sound_piece = QSound("source/luozisheng.wav")
+        self.sound_win = QSound("source/win.wav")
+        self.sound_defeated = QSound("source/defeated.wav")
+
         # img = QPixmap('source/表情.png')
         # img.scaled(self.label_2.size(), Qt.KeepAspectRatioByExpanding)
         # self.label_2.setScaledContents(True)
@@ -124,9 +98,11 @@ class PlayGame(QWidget, main_ui.Ui_Form):
 
         # 绑定返回按钮
         self.backBtn.clicked.connect(self.goBack)
-        self.startBtn.clicked.connect(self.restar)
-        self.loseBtn.clicked.connect(self.lose)
-        self.returnBtn.clicked.connect(self.huiback)
+        self.startBtn.clicked.connect(self.reStart)
+        self.pushButton_5.clicked.connect(self.lose)
+        self.pushButton_3.clicked.connect(self.draw)
+        self.pushButton_4.clicked.connect(self.begin)
+        self.returnBtn.clicked.connect(self.huiBack)
 
         self.gameStatu = []
 
@@ -146,9 +122,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
     def mouseReleaseEvent(self, a0: QtGui.QMouseEvent):
         if self.gameStatu == False or self.isCanXia == False:
             return None
-        print(a0.pos())
-        print("x:", a0.x())
-        print("y:", a0.y())
+
         pos, chess_index = self.reversePos(a0)
         if pos is None:
             return
@@ -158,16 +132,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
 
         self.chess = Chessman(color=self.turnChessColor, parent=self)
         self.chess.setIndex(chess_index[0], chess_index[1])
-        self.chess.move(pos)
-        self.chess.show()  # 显示棋子
-        self.history.append(self.chess)
-        self.history2.append(self.focusPoint)
-
-        self.focusPoint.move(QPoint(pos.x() - 18 + self.label.x(), pos.y() + self.label.y() - 18))
-        self.focusPoint.show()
-        self.focusPoint.raise_()
-
-        print("棋盘交点位置：", chess_index)
+        self.chess.move()
 
         s_g_p = base_pb2.server_gobang_position()
         s_g_p.cmd = 6
@@ -175,20 +140,6 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         s_g_p.y = chess_index[1]
 
         self.writeData(s_g_p.SerializeToString())
-
-        # 放入棋盘
-        self.chessboard[chess_index[1]][chess_index[0]] = self.chess
-
-        if self.turnChessColor == "black":
-            self.turnChessColor = "white"
-        else:
-            self.turnChessColor = "black"
-        self.lbl = None
-        result = self.isWin(self.chess)
-        if result != None:
-            print(result + '赢了')
-            self.isBeginGame = False
-            self.showResult(result)
         self.isCanXia = False
         # 自动落子
         # self.autoDown()
@@ -286,20 +237,24 @@ class PlayGame(QWidget, main_ui.Ui_Form):
 
     def showResult(self, isWin=None):
         self.gameStatu = False
-        if isWin == "white":
-            self.lbl = QLabel(self)
+        self.lbl = QLabel(self)
+        if isWin == 'white':
             self.lbl.setPixmap(QPixmap("source/白棋胜利.png"))
             self.lbl.move(150, 150)
             self.lbl.show()
-        elif isWin == "black":
-            self.lbl = QLabel(self)
+        elif isWin == 'black':
             self.lbl.setPixmap(QPixmap("source/黑棋胜利.png"))
             self.lbl.move(150, 150)
             self.lbl.show()
-        else:
-            return
 
-    def restar(self):
+        if isWin == self.myColor:
+            self.sound_win.play()
+        else:
+            self.sound_defeated.play()
+        self.isBeginGame = False
+        self.isCanXia = False
+
+    def reStart(self):
         for i in range(19):
             for j in range(19):
                 if self.chessboard[i][j] != None:
@@ -313,23 +268,33 @@ class PlayGame(QWidget, main_ui.Ui_Form):
 
         self.gameStatu = True
 
-    def lose(self):
-        if self.gameStatu == False:
-            return
-        if self.turnChessColor == "black":
-            self.lbl = QLabel(self)
-            self.lbl.setPixmap(QPixmap("source/白棋胜利.png"))
-            self.lbl.move(150, 150)
-            self.lbl.show()
-        elif self.turnChessColor == "white":
-            self.lbl = QLabel(self)
-            self.lbl.setPixmap(QPixmap("source/黑棋胜利.png"))
-            self.lbl.move(150, 150)
-            self.lbl.show()
-        else:
-            return
+    def begin(self):
+        pass
 
-    def huiback(self):
+    def lose(self):
+        if self.gameStatu == False or self.isBeginGame == False:
+            return
+        if self.myColor == 'black':
+            self.showResult('white')
+        elif self.myColor == 'white':
+            self.showResult('black')
+        w_w = base_pb2.whoWin()
+        w_w.cmd = 15
+        w_w.code = 2
+        w_w.win = ''
+        self.writeData(w_w.SerializeToString())
+
+    def draw(self):
+        if self.gameStatu == False or self.isBeginGame == False:
+            return
+        self.showResult(self.myColor)
+        w_w = base_pb2.whoWin()
+        w_w.cmd = 15
+        w_w.code = 3
+        w_w.win = ''
+        self.writeData(w_w.SerializeToString())
+
+    def huiBack(self):
         if self.gameStatu == False:
             return
         m = self.history.pop()
@@ -368,34 +333,9 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         # 获取对方的棋子位置，并显示
         s_g_p = base_pb2.server_gobang_position()
         s_g_p.ParseFromString(data)
-
-        # 注意：x,y坐标对应
-        chess_index = (s_g_p.y, s_g_p.x)  # 棋子在棋盘中的下标
-        pos = QPoint(22 + s_g_p.x * 36, 22 + s_g_p.y * 36)  # 棋子在棋盘中的坐标
-
         self.chessman = Chessman(color=self.turnChessColor, parent=self)
-        self.chessman.setIndex(chess_index[1], chess_index[0])
-        self.chessman.move(pos)
-        self.chessman.show()  # 显示棋子
-
-        # 显示标识
-        self.focusPoint.move(QPoint(pos.x() - 18 + self.label.x(), pos.y() - 18 + self.label.y()))
-        self.focusPoint.show()
-        self.focusPoint.raise_()
-
-        self.chessboard[chess_index[0]][chess_index[1]] = self.chessman
-
-        # 改变落子颜色
-        if self.turnChessColor == 'black':
-            self.turnChessColor = 'white'
-        else:
-            self.turnChessColor = 'black'
-        # 判断输赢
-        result = self.isWin(self.chessman)
-        if result != None:
-            print(result + '赢了')
-            self.showResult(result)
-            self.isBeginGame = False
+        self.chessman.setIndex(s_g_p.x, s_g_p.y)
+        self.chessman.move()
         self.isCanXia = True
 
     def cmd9(self, data):
@@ -418,6 +358,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         if reply == QMessageBox.Yes:
             c_g_i.code = 1
             self.isBeginGame = True
+            self.myColor = "white"
         else:
             c_g_i.code = 0
             pass
@@ -432,6 +373,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             reply = "对方接受了请求"
             self.isBeginGame = True
             self.isCanXia = True
+            self.myColor = "black"
         elif s_g_i.code == 0:
             reply = "对方拒绝了请求"
 
@@ -463,6 +405,12 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.label_11.setScaledContents(True)
         self.label_3.setText(s)
 
+    def cmd15(self, data):
+        w_w = base_pb2.whoWin()
+        w_w.ParseFromString(data)
+        if w_w.code == 2 or w_w.code == 3:
+            self.showResult(self.myColor)
+
     def insertChatMessage(self, s):
         self.textBrowser.append(s)
         self.textBrowser.moveCursor(QTextCursor.End)
@@ -492,6 +440,13 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         if self.fightBox.clickedButton() == cancel:
             self.fightBox.close()
 
+    def sendGameRes(self, code, win):
+        res = base_pb2.whoWin()
+        res.cmd = 15
+        res.code = code
+        res.win = win
+        self.writeData(res.SerializeToString())
+
     def messageSend(self):
         if self.comboBox.lineEdit().text() == "":
             return
@@ -503,10 +458,3 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         s = '<font color="#F9904A">我 %s </font> <br>%s' % (c_m.time, self.comboBox.lineEdit().text())
         self.insertChatMessage(s)
         self.writeData(c_m.SerializeToString())
-
-
-if __name__ == "__main__":
-    a = QApplication(sys.argv)
-    m = PlayGame()
-    m.show()
-    sys.exit(a.exec_())

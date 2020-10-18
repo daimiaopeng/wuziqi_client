@@ -1,12 +1,8 @@
-# -*- coding:utf-8 -*-
-# @author: alex
-# @time: 2018/12/27 16:29
 from PyQt5 import QtGui, QtCore
 from PyQt5.QtWidgets import *
 from PyQt5 import *
 from PyQt5.QtGui import *
 import sys
-
 from PyQt5.QtCore import *
 
 
