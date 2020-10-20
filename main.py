@@ -96,7 +96,5 @@ class MyWindow(QMainWindow, login_ui.Ui_MainWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     myWin = MyWindow()
-
     myWin.show()
-
     app.exec_()

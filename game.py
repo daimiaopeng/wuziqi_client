@@ -454,9 +454,11 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         """ % (
             s_u_i.name, s_u_i.integral, s_u_i.level, s_u_i.numsGame, s_u_i.gameCurrency, s_u_i.win, s_u_i.lose,
             s_u_i.draw)
-        img = QPixmap()
-        img.loadFromData(base64.b64decode(s_u_i.avatar))
+        img_src = r'source\avatar\(%s).png' % s_u_i.avatar
+        img = QPixmap(img_src)
+        print(img_src)
         self.label_11.setPixmap(img)
+        self.label_11.setFixedSize(img.size())
         self.label_11.setScaledContents(True)
         self.label_3.setText(s)
 

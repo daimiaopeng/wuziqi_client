@@ -14,32 +14,38 @@
    <string>Form</string>
   </property>
   <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>120</y>
-     <width>540</width>
-     <height>540</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap>source/chessboard.jpg</pixmap>
-   </property>
+      <property name="geometry">
+          <rect>
+              <x>200</x>
+              <y>120</y>
+              <width>540</width>
+              <height>540</height>
+          </rect>
+      </property>
+      <property name="cursor">
+          <cursorShape>ArrowCursor</cursorShape>
+      </property>
+      <property name="inputMethodHints">
+          <set>Qt::ImhNone</set>
+      </property>
+      <property name="text">
+          <string/>
+      </property>
+      <property name="pixmap">
+          <pixmap>source/chessboard.jpg</pixmap>
+      </property>
   </widget>
   <widget class="QLabel" name="label_11">
    <property name="enabled">
     <bool>true</bool>
    </property>
    <property name="geometry">
-    <rect>
-     <x>780</x>
-     <y>90</y>
-     <width>91</width>
-     <height>71</height>
-    </rect>
+       <rect>
+           <x>780</x>
+           <y>30</y>
+           <width>128</width>
+           <height>128</height>
+       </rect>
    </property>
    <property name="text">
     <string>头像</string>
@@ -47,12 +53,12 @@
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
-    <rect>
-     <x>880</x>
-     <y>100</y>
-     <width>191</width>
-     <height>71</height>
-    </rect>
+       <rect>
+           <x>930</x>
+           <y>40</y>
+           <width>211</width>
+           <height>121</height>
+       </rect>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -182,16 +188,19 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser">
-   <property name="geometry">
-    <rect>
-     <x>770</x>
-     <y>420</y>
-     <width>256</width>
-     <height>192</height>
-    </rect>
-   </property>
-  </widget>
+     <widget class="QTextBrowser" name="textBrowser">
+         <property name="geometry">
+             <rect>
+                 <x>770</x>
+                 <y>420</y>
+                 <width>256</width>
+                 <height>192</height>
+             </rect>
+         </property>
+         <property name="cursor" stdset="0">
+             <cursorShape>ArrowCursor</cursorShape>
+         </property>
+     </widget>
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
