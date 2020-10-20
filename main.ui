@@ -4,268 +4,499 @@
  <widget class="QWidget" name="Form">
   <property name="geometry">
    <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>1314</width>
-    <height>792</height>
+       <x>0</x>
+       <y>0</y>
+       <width>1142</width>
+       <height>677</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
+     <widget class="QLabel" name="label">
+         <property name="geometry">
+             <rect>
+                 <x>287</x>
+                 <y>40</y>
+                 <width>540</width>
+                 <height>540</height>
+             </rect>
+         </property>
+         <property name="cursor">
+             <cursorShape>ArrowCursor</cursorShape>
+         </property>
+         <property name="inputMethodHints">
+             <set>Qt::ImhNone</set>
+         </property>
+         <property name="text">
+             <string/>
+         </property>
+         <property name="pixmap">
+             <pixmap>source/chessboard.jpg</pixmap>
+         </property>
+         <property name="buddy">
+             <cstring>listView</cstring>
+         </property>
+     </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="enabled">
+       <bool>true</bool>
+   </property>
       <property name="geometry">
           <rect>
-              <x>200</x>
-              <y>120</y>
-              <width>540</width>
-              <height>540</height>
+              <x>77</x>
+              <y>30</y>
+              <width>128</width>
+              <height>128</height>
           </rect>
       </property>
-      <property name="cursor">
-          <cursorShape>ArrowCursor</cursorShape>
-      </property>
-      <property name="inputMethodHints">
-          <set>Qt::ImhNone</set>
+      <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>100</horstretch>
+              <verstretch>123</verstretch>
+          </sizepolicy>
       </property>
       <property name="text">
           <string/>
       </property>
       <property name="pixmap">
-          <pixmap>source/chessboard.jpg</pixmap>
+          <pixmap>source/avatar/1.png</pixmap>
       </property>
   </widget>
-  <widget class="QLabel" name="label_11">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-       <rect>
-           <x>780</x>
-           <y>30</y>
-           <width>128</width>
-           <height>128</height>
-       </rect>
-   </property>
-   <property name="text">
-    <string>头像</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-       <rect>
-           <x>930</x>
-           <y>40</y>
-           <width>211</width>
-           <height>121</height>
-       </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>780</x>
-     <y>640</y>
-     <width>475</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QComboBox" name="comboBox">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="tabletTracking">
-       <bool>false</bool>
-      </property>
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-      <property name="currentText">
-       <string/>
-      </property>
-      <property name="currentIndex">
-       <number>-1</number>
-      </property>
-      <property name="insertPolicy">
-       <enum>QComboBox::NoInsert</enum>
-      </property>
-      <item>
-       <property name="text">
-        <string>大家好，很高兴见到各位！</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>快点吧，我等到花儿也谢了。</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>你的牌打得太好了！</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>我们交个朋友吧，能告诉我你的联系方法吗？</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>各位，真不好意思，我要离开一会。</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>又断线了，网络怎么这么差啊！</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>不要吵了，有什么好吵的，专心玩游戏吧。</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>你是MM，还是GG？</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>下次再玩吧，我要走了。</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>再见了，我会想念大家的。</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>和你合作真是太愉快啦。</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>不要走，决战到天亮。</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_2">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>TextL</string>
-      </property>
-      <property name="buddy">
-       <cstring>pushButton</cstring>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton">
-      <property name="text">
-       <string>发送</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QListView" name="listView">
-   <property name="geometry">
-    <rect>
-     <x>770</x>
-     <y>200</y>
-     <width>256</width>
-     <height>192</height>
-    </rect>
-   </property>
-  </widget>
-     <widget class="QTextBrowser" name="textBrowser">
+     <widget class="QListView" name="listView">
          <property name="geometry">
              <rect>
-                 <x>770</x>
-                 <y>420</y>
+                 <x>857</x>
+                 <y>41</y>
                  <width>256</width>
-                 <height>192</height>
+                 <height>271</height>
              </rect>
          </property>
-         <property name="cursor" stdset="0">
-             <cursorShape>ArrowCursor</cursorShape>
+     </widget>
+     <widget class="QLabel" name="label_3">
+         <property name="geometry">
+             <rect>
+                 <x>47</x>
+                 <y>160</y>
+                 <width>202</width>
+                 <height>66</height>
+             </rect>
+         </property>
+         <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+             </sizepolicy>
+         </property>
+         <property name="text">
+             <string>昵称:
+                 积分：0 级别：0
+                 总盘数：0 游戏币：0
+                 胜：0 负：0 平：0
+             </string>
          </property>
      </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>680</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>悔棋</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_3">
-   <property name="geometry">
-    <rect>
-     <x>530</x>
-     <y>680</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>和棋</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_4">
-   <property name="geometry">
-    <rect>
-     <x>420</x>
-     <y>670</y>
-     <width>101</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>匹配对手</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_5">
-   <property name="geometry">
-    <rect>
-     <x>640</x>
-     <y>680</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>认输</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_6">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>680</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>设置</string>
-   </property>
-  </widget>
+     <widget class="Line" name="line">
+         <property name="geometry">
+             <rect>
+                 <x>10</x>
+                 <y>30</y>
+                 <width>20</width>
+                 <height>271</height>
+             </rect>
+         </property>
+         <property name="orientation">
+             <enum>Qt::Vertical</enum>
+         </property>
+     </widget>
+     <widget class="Line" name="line_2">
+         <property name="geometry">
+             <rect>
+                 <x>257</x>
+                 <y>30</y>
+                 <width>20</width>
+                 <height>271</height>
+             </rect>
+         </property>
+         <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+             </sizepolicy>
+         </property>
+         <property name="orientation">
+             <enum>Qt::Vertical</enum>
+         </property>
+     </widget>
+     <widget class="Line" name="line_3">
+         <property name="geometry">
+             <rect>
+                 <x>17</x>
+                 <y>290</y>
+                 <width>251</width>
+                 <height>20</height>
+             </rect>
+         </property>
+         <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+         </property>
+     </widget>
+     <widget class="Line" name="line_4">
+         <property name="geometry">
+             <rect>
+                 <x>17</x>
+                 <y>20</y>
+                 <width>250</width>
+                 <height>20</height>
+             </rect>
+         </property>
+         <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+         </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+         <property name="geometry">
+             <rect>
+                 <x>60</x>
+                 <y>250</y>
+                 <width>36</width>
+                 <height>36</height>
+             </rect>
+         </property>
+         <property name="text">
+             <string/>
+         </property>
+         <property name="pixmap">
+             <pixmap>source/black.png</pixmap>
+         </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+         <property name="geometry">
+             <rect>
+                 <x>47</x>
+                 <y>450</y>
+                 <width>202</width>
+                 <height>66</height>
+             </rect>
+         </property>
+         <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+             </sizepolicy>
+         </property>
+         <property name="text">
+             <string>昵称:
+                 积分：0 级别：0
+                 总盘数：0 游戏币：0
+                 胜：0 负：0 平：0
+             </string>
+         </property>
+     </widget>
+     <widget class="Line" name="line_5">
+         <property name="geometry">
+             <rect>
+                 <x>17</x>
+                 <y>300</y>
+                 <width>250</width>
+                 <height>20</height>
+             </rect>
+         </property>
+         <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+         </property>
+     </widget>
+     <widget class="Line" name="line_6">
+         <property name="geometry">
+             <rect>
+                 <x>257</x>
+                 <y>310</y>
+                 <width>20</width>
+                 <height>281</height>
+             </rect>
+         </property>
+         <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+             </sizepolicy>
+         </property>
+         <property name="orientation">
+             <enum>Qt::Vertical</enum>
+         </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+         <property name="geometry">
+             <rect>
+                 <x>60</x>
+                 <y>540</y>
+                 <width>36</width>
+                 <height>36</height>
+             </rect>
+         </property>
+         <property name="text">
+             <string/>
+         </property>
+         <property name="pixmap">
+             <pixmap>source/white.png</pixmap>
+         </property>
+     </widget>
+     <widget class="Line" name="line_7">
+         <property name="geometry">
+             <rect>
+                 <x>17</x>
+                 <y>580</y>
+                 <width>251</width>
+                 <height>20</height>
+             </rect>
+         </property>
+         <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+         </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+         <property name="enabled">
+             <bool>true</bool>
+         </property>
+         <property name="geometry">
+             <rect>
+                 <x>77</x>
+                 <y>320</y>
+                 <width>128</width>
+                 <height>128</height>
+             </rect>
+         </property>
+         <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>100</horstretch>
+                 <verstretch>123</verstretch>
+             </sizepolicy>
+         </property>
+         <property name="text">
+             <string/>
+         </property>
+         <property name="pixmap">
+             <pixmap>source/avatar/1.png</pixmap>
+         </property>
+     </widget>
+     <widget class="Line" name="line_8">
+         <property name="geometry">
+             <rect>
+                 <x>10</x>
+                 <y>310</y>
+                 <width>20</width>
+                 <height>281</height>
+             </rect>
+         </property>
+         <property name="orientation">
+             <enum>Qt::Vertical</enum>
+         </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+             <rect>
+                 <x>287</x>
+                 <y>590</y>
+                 <width>541</width>
+                 <height>41</height>
+             </rect>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+             <item row="0" column="0">
+                 <widget class="QPushButton" name="pushButton_6">
+                     <property name="text">
+                         <string>设置</string>
+                     </property>
+                 </widget>
+             </item>
+             <item row="0" column="1">
+                 <widget class="QPushButton" name="pushButton_2">
+                     <property name="text">
+                         <string>悔棋</string>
+                     </property>
+                 </widget>
+             </item>
+             <item row="0" column="2">
+                 <widget class="QPushButton" name="pushButton_4">
+                     <property name="text">
+                         <string>匹配对手</string>
+                     </property>
+                 </widget>
+             </item>
+             <item row="0" column="3">
+                 <widget class="QPushButton" name="pushButton_3">
+                     <property name="text">
+                         <string>和棋</string>
+                     </property>
+                 </widget>
+             </item>
+             <item row="0" column="4">
+                 <widget class="QPushButton" name="pushButton_5">
+                     <property name="text">
+                         <string>认输</string>
+                     </property>
+                 </widget>
+             </item>
+         </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+             <rect>
+                 <x>860</x>
+                 <y>330</y>
+                 <width>251</width>
+                 <height>301</height>
+             </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
+                 <widget class="QTextBrowser" name="textBrowser">
+                     <property name="cursor" stdset="0">
+                         <cursorShape>ArrowCursor</cursorShape>
+                     </property>
+                 </widget>
+             </item>
+             <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout">
+                     <item>
+                         <widget class="QComboBox" name="comboBox">
+                             <property name="enabled">
+                                 <bool>true</bool>
+                             </property>
+                             <property name="tabletTracking">
+                                 <bool>false</bool>
+                             </property>
+                             <property name="editable">
+                                 <bool>true</bool>
+                             </property>
+                             <property name="currentText">
+                                 <string/>
+                             </property>
+                             <property name="currentIndex">
+                                 <number>-1</number>
+                             </property>
+                             <property name="insertPolicy">
+                                 <enum>QComboBox::NoInsert</enum>
+                             </property>
+                             <item>
+                                 <property name="text">
+                                     <string>大家好，很高兴见到各位！</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>快点吧，我等到花儿也谢了。</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>你的牌打得太好了！</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>我们交个朋友吧，能告诉我你的联系方法吗？</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>各位，真不好意思，我要离开一会。</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>又断线了，网络怎么这么差啊！</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>不要吵了，有什么好吵的，专心玩游戏吧。</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>你是MM，还是GG？</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>下次再玩吧，我要走了。</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>再见了，我会想念大家的。</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>和你合作真是太愉快啦。</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>不要走，决战到天亮。</string>
+                                 </property>
+                             </item>
+                         </widget>
+                     </item>
+                     <item>
+                         <widget class="QPushButton" name="pushButton">
+                             <property name="text">
+                                 <string>发送</string>
+                             </property>
+                         </widget>
+                     </item>
+                 </layout>
+             </item>
+         </layout>
+     </widget>
+     <widget class="QLCDNumber" name="lcdNumber">
+         <property name="geometry">
+             <rect>
+                 <x>110</x>
+                 <y>240</y>
+                 <width>101</width>
+                 <height>51</height>
+             </rect>
+         </property>
+         <property name="value" stdset="0">
+             <double>0.000000000000000</double>
+         </property>
+     </widget>
+     <widget class="QLCDNumber" name="lcdNumber_2">
+         <property name="geometry">
+             <rect>
+                 <x>110</x>
+                 <y>530</y>
+                 <width>101</width>
+                 <height>51</height>
+             </rect>
+         </property>
+         <property name="value" stdset="0">
+             <double>0.000000000000000</double>
+         </property>
+     </widget>
+     <zorder>label_2</zorder>
+     <zorder>lcdNumber</zorder>
+     <zorder>layoutWidget</zorder>
+     <zorder>label</zorder>
+     <zorder>layoutWidget</zorder>
+     <zorder>listView</zorder>
+     <zorder>label_11</zorder>
+     <zorder>label_3</zorder>
+     <zorder>line</zorder>
+     <zorder>line_2</zorder>
+     <zorder>line_3</zorder>
+     <zorder>line_4</zorder>
+     <zorder>label_4</zorder>
+     <zorder>line_5</zorder>
+     <zorder>line_6</zorder>
+     <zorder>label_5</zorder>
+     <zorder>line_7</zorder>
+     <zorder>label_12</zorder>
+     <zorder>line_8</zorder>
+     <zorder>lcdNumber_2</zorder>
  </widget>
  <resources/>
  <connections/>

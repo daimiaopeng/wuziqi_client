@@ -91,6 +91,7 @@ message server_user_infor{
     int32 draw = 8;
     int32 gameCurrency = 9;
     string avatar = 10;
+    int32 code = 11; //code = 1 自己的 code = 2别人的
 }
 message whoWin{
     int32 cmd = 1; //15

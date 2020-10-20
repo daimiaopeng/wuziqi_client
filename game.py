@@ -32,44 +32,26 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.sound_piece = QSound("source/luozisheng.wav")
         self.sound_win = QSound("source/win.wav")
         self.sound_defeated = QSound("source/defeated.wav")
-
-        # img = QPixmap('source/表情.png')
-        # img.scaled(self.label_2.size(), Qt.KeepAspectRatioByExpanding)
-        # self.label_2.setScaledContents(True)
-        # self.label_2.setPixmap(img)
         self.comboBox.currentIndexChanged.connect(self.messageSend)
         self.listView.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.listView.clicked.connect(self.listViewClicked)
         self.pushButton.clicked.connect(self.messageSend)
         self.pushButton_2.clicked.connect(self.withdraw)
-        # 左上角chessboard[0][0]
-        # 右上角chessboard[0][18]
-        # 左下角chessboard[18][0]
-        # 右下角chessboard[18][18]
-        # chessboard[行下标][列下标]
         self.chessboard = [[None for i in range(19)] for i in range(19)]
-        # 落子棋子颜色
-        self.turnChessColor = "black"
+        self.turnChessColor = 'black'
+        self.myColor = self.turnChessColor
         self.history = []
         self.history2 = []
         self.is_over = False
         self.lbl = None
-
-        # self.lab = QLabel('背景图片', self)
-        # self.lab.setGeometry(0, 0, 760, 650)
-        # pixmap = QPixmap('source/游戏界面.png')
-        # self.lab.setPixmap(pixmap)
-
-        # # 配置背景图
-        # p = QPalette(self.palette())  # 获得当前的调色板
-        # brush = QBrush(QImage("source/游戏界面.png"))
-        # p.setBrush(QPalette.Background, brush)  # 设置调色
-        # self.setPalette(p)  # 给窗口设置调色板
-
-        # 设置标题
-        # self.resize(760,650)
         self.init()
-        self.initButton()
+        self.initBeginGame()
+
+        self.lcdNumber.setMode(QLCDNumber.Dec)
+        # self.lcdNumber.setStyleSheet("border: 2px solid black; color: red; ")
+        self.time = QTimer(self)
+        self.time.setInterval(1000)
+        self.time.timeout.connect(self.refresh)
 
     def init(self):
         self.setWindowTitle("双人联机")
@@ -79,37 +61,10 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         # 设置窗口大小
         # self.setFixedSize(QImage("source/游戏界面.png").size())
 
-        self.backBtn = MyButton.MyButton('source/返回按钮_hover.png',
-                                         'source/返回按钮_normal.png',
-                                         'source/返回按钮_press.png',
-                                         parent=self)
-        self.backBtn.move(650, 22)
-
-        self.startBtn = MyButton.MyButton('source/开始按钮_hover.png',
-                                          'source/开始按钮_normal.png',
-                                          'source/开始按钮_press.png',
-                                          parent=self)
-        self.startBtn.move(650, 300)
-
-        self.returnBtn = MyButton.MyButton('source/悔棋按钮_hover.png',
-                                           'source/悔棋按钮_normal.png',
-                                           'source/悔棋按钮_press.png',
-                                           parent=self)
-        self.returnBtn.move(650, 400)
-
-        self.loseBtn = MyButton.MyButton('source/认输按钮_hover.png',
-                                         'source/认输按钮_normal.png',
-                                         'source/认输按钮_press.png',
-                                         parent=self)
-        self.loseBtn.move(650, 500)
-
-        # 绑定返回按钮
-        self.backBtn.clicked.connect(self.goBack)
-        self.startBtn.clicked.connect(self.reStart)
-        self.pushButton_5.clicked.connect(self.lose)
+        self.pushButton_4.clicked.connect(self.reStart)
+        self.pushButton_5.clicked.connect(self.wantToLose)
         self.pushButton_3.clicked.connect(self.draw)
-        self.pushButton_4.clicked.connect(self.begin)
-        self.returnBtn.clicked.connect(self.huiBack)
+        # self.pushButton_4.clicked.connect(self.begin)
 
         self.gameStatu = []
 
@@ -124,19 +79,42 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         # self.setFixedSize(self.pic1.size())  # 设置棋子大小
         # self.show()
 
-    def initButton(self):
+    def initBeginGame(self):
         if self.isBeginGame:
             self.pushButton_2.setEnabled(True)
             self.pushButton_3.setEnabled(True)
             self.pushButton_5.setEnabled(True)
+            self.time.start()
         else:
             self.pushButton_2.setEnabled(False)
             self.pushButton_3.setEnabled(False)
             self.pushButton_5.setEnabled(False)
+        self.endDate = QDateTime.currentMSecsSinceEpoch() + 1000 * 60 * 10
+        self.endDateOther = self.endDate
 
-    def goBack(self):
-        self.backSignal.emit()
-        self.close()
+    def refresh(self):
+        nowData = QDateTime.currentMSecsSinceEpoch()
+        interval = self.endDate - nowData
+        interval2 = self.endDateOther - nowData
+        if self.isBeginGame == False:
+            return
+        if interval > 0:
+            if self.isCanXia == False:
+                self.endDate = self.endDate + 1000
+            else:
+                self.endDateOther = self.endDateOther + 1000
+            self.lcdNumber.display(self.conversionTime(interval))
+            self.lcdNumber_2.display(self.conversionTime(interval2))
+        else:
+            self.lose()
+
+    def conversionTime(self, interval):
+        days = interval // (24 * 60 * 60 * 1000)
+        hour = (interval - days * 24 * 60 * 60 * 1000) // (60 * 60 * 1000)
+        min = (interval - days * 24 * 60 * 60 * 1000 - hour * 60 * 60 * 1000) // (60 * 1000)
+        sec = (interval - days * 24 * 60 * 60 * 1000 - hour * 60 * 60 * 1000 - min * 60 * 1000) // 1000
+        s = str(min) + ':' + str(sec)
+        return s
 
     def closeEvent(self, a0: QtGui.QCloseEvent):
         self.backSignal.emit()
@@ -269,11 +247,11 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.lbl = QLabel(self)
         if isWin == 'white':
             self.lbl.setPixmap(QPixmap("source/白棋胜利.png"))
-            self.lbl.move(150, 150)
+            self.lbl.move(300, 150)
             self.lbl.show()
         elif isWin == 'black':
             self.lbl.setPixmap(QPixmap("source/黑棋胜利.png"))
-            self.lbl.move(150, 150)
+            self.lbl.move(300, 150)
             self.lbl.show()
 
         if isWin == self.myColor:
@@ -281,9 +259,10 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         else:
             self.sound_defeated.play()
         self.isBeginGame = False
-        self.initButton()
+        self.initBeginGame()
         self.isCanXia = False
         self.label.setCursor(QCursor(Qt.ForbiddenCursor))
+        self.time.stop()
 
     def reStart(self):
         for i in range(19):
@@ -302,12 +281,16 @@ class PlayGame(QWidget, main_ui.Ui_Form):
     def begin(self):
         pass
 
-    def lose(self):
+    def wantToLose(self):
         if self.gameStatu == False or self.isBeginGame == False:
             return
         reply = QMessageBox.question(self, '提示', '您确定要认输吗?', QMessageBox.Yes | QMessageBox.No)
         if reply == QMessageBox.No:
             return
+        else:
+            self.lose()
+
+    def lose(self):
         if self.myColor == 'black':
             self.showResult('white')
         elif self.myColor == 'white':
@@ -410,7 +393,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         if reply == QMessageBox.Yes:
             c_g_i.code = 1
             self.isBeginGame = True
-            self.initButton()
+            self.initBeginGame()
             self.myColor = "white"
         else:
             c_g_i.code = 0
@@ -425,7 +408,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         if s_g_i.code == 1:
             reply = "对方接受了请求"
             self.isBeginGame = True
-            self.initButton()
+            self.initBeginGame()
             self.isCanXia = True
             self.label.setCursor(QCursor(Qt.PointingHandCursor))
             self.myColor = "black"
@@ -454,13 +437,24 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         """ % (
             s_u_i.name, s_u_i.integral, s_u_i.level, s_u_i.numsGame, s_u_i.gameCurrency, s_u_i.win, s_u_i.lose,
             s_u_i.draw)
-        img_src = r'source\avatar\(%s).png' % s_u_i.avatar
+        img_src = r'source\avatar\%s.png' % s_u_i.avatar
         img = QPixmap(img_src)
-        print(img_src)
-        self.label_11.setPixmap(img)
-        self.label_11.setFixedSize(img.size())
-        self.label_11.setScaledContents(True)
-        self.label_3.setText(s)
+        if s_u_i.code == 1:
+            self.label_11.setPixmap(img)
+            self.label_11.setFixedSize(img.size())
+            self.label_11.setScaledContents(True)
+            self.label_3.setText(s)
+        elif s_u_i.code == 2:
+            self.label_12.setPixmap(img)
+            self.label_12.setFixedSize(img.size())
+            self.label_12.setScaledContents(True)
+            self.label_4.setText(s)
+        if self.myColor == 'black':
+            self.label_2.setPixmap(QPixmap(r'source\black.png'))
+            self.label_5.setPixmap(QPixmap(r'source\white.png'))
+        else:
+            self.label_2.setPixmap(QPixmap(r'source\white.png'))
+            self.label_5.setPixmap(QPixmap(r'source\black.png'))
 
     def cmd15(self, data):
         w_w = base_pb2.whoWin()

@@ -45,7 +45,6 @@ class Chessman(QLabel):
                 self.parent.sendGameRes(1, self.parent.userGameInfor.name)
             else:
                 print('输了')
-            self.parent.isBeginGame = False
             self.parent.showResult(result)
 
     def setIndex(self, x, y):
