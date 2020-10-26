@@ -5,6 +5,7 @@ import button as MyButton
 import main_ui
 import base64
 from chessman import *
+from PyQt5.Qt import QProgressDialog
 
 
 class PlayGame(QWidget, main_ui.Ui_Form):
@@ -28,15 +29,13 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             14: self.cmd14,
             15: self.cmd15,
             16: self.cmd16,
+            18: self.cmd18,
         }
         self.sound_piece = QSound("source/luozisheng.wav")
         self.sound_win = QSound("source/win.wav")
         self.sound_defeated = QSound("source/defeated.wav")
         self.comboBox.currentIndexChanged.connect(self.messageSend)
         self.listView.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.listView.clicked.connect(self.listViewClicked)
-        self.pushButton.clicked.connect(self.messageSend)
-        self.pushButton_2.clicked.connect(self.withdraw)
         self.chessboard = [[None for i in range(19)] for i in range(19)]
         self.turnChessColor = 'black'
         self.myColor = self.turnChessColor
@@ -44,6 +43,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.history2 = []
         self.is_over = False
         self.lbl = None
+        self.isMatch = False
         self.init()
         self.initBeginGame()
 
@@ -55,39 +55,32 @@ class PlayGame(QWidget, main_ui.Ui_Form):
 
     def init(self):
         self.setWindowTitle("双人联机")
-
         # 设置窗口图标
         self.setWindowIcon(QIcon("source/icon.ico"))
         # 设置窗口大小
         # self.setFixedSize(QImage("source/游戏界面.png").size())
-
-        self.pushButton_4.clicked.connect(self.reStart)
+        self.listView.clicked.connect(self.listViewClicked)
+        self.pushButton.clicked.connect(self.messageSend)
+        self.pushButton_2.clicked.connect(self.withdraw)
+        self.pushButton_4.clicked.connect(self.beginGame)
         self.pushButton_5.clicked.connect(self.wantToLose)
         self.pushButton_3.clicked.connect(self.draw)
-        # self.pushButton_4.clicked.connect(self.begin)
-
-        self.gameStatu = []
-
         self.focusPoint = QLabel(self)
         self.focusPoint.setPixmap(QPixmap("source/标识.png"))
-
         self.pushButton.setShortcut(QKeySequence(Qt.Key_Enter))
         self.pushButton.setShortcut(QKeySequence(Qt.Key_Return))
-        # self.pic1 = QPixmap('source/white.png')
-        # self.pic2 = QPixmap('source/black.png')
-        # self.setPixmap(self.pic1)
-        # self.setFixedSize(self.pic1.size())  # 设置棋子大小
-        # self.show()
 
     def initBeginGame(self):
         if self.isBeginGame:
             self.pushButton_2.setEnabled(True)
             self.pushButton_3.setEnabled(True)
             self.pushButton_5.setEnabled(True)
+            self.pushButton_4.setEnabled(False)
             self.time.start()
         else:
             self.pushButton_2.setEnabled(False)
             self.pushButton_3.setEnabled(False)
+            self.pushButton_4.setEnabled(True)
             self.pushButton_5.setEnabled(False)
         self.endDate = QDateTime.currentMSecsSinceEpoch() + 1000 * 60 * 10
         self.endDateOther = self.endDate
@@ -126,7 +119,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         else:
             self.label.setCursor(QCursor(Qt.PointingHandCursor))
 
-        if self.gameStatu == False:
+        if self.isBeginGame == False:
             return None
 
         pos, chess_index = self.reversePos(a0)
@@ -162,7 +155,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         return QPoint(22 + self.x * 36, 22 + self.y * 36), (self.x, self.y)
 
     def isWin(self, chessman):
-        print("in iswin,lastChessman:", chessman.color, chessman.x, chessman.y)
+        # print("in iswin,lastChessman:", chessman.color, chessman.x, chessman.y)
         # 水平方向y相同，chessboard[chessman.y][i]
         count = 1
         # 左边
@@ -243,24 +236,23 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         return None
 
     def showResult(self, isWin=None):
-        self.gameStatu = False
         self.lbl = QLabel(self)
         if isWin == 'white':
             self.lbl.setPixmap(QPixmap("source/白棋胜利.png"))
-            self.lbl.move(300, 150)
+            self.lbl.move(300, 100)
             self.lbl.show()
         elif isWin == 'black':
             self.lbl.setPixmap(QPixmap("source/黑棋胜利.png"))
-            self.lbl.move(300, 150)
+            self.lbl.move(300, 100)
             self.lbl.show()
-
         if isWin == self.myColor:
             self.sound_win.play()
         else:
             self.sound_defeated.play()
         self.isBeginGame = False
-        self.initBeginGame()
         self.isCanXia = False
+        self.isMatch = False
+        self.initBeginGame()
         self.label.setCursor(QCursor(Qt.ForbiddenCursor))
         self.time.stop()
 
@@ -276,13 +268,30 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         if self.lbl != None:
             self.lbl.close()
 
-        self.gameStatu = True
+    def beginGame(self):
+        self.reStart()
+        if self.isBeginGame == False and self.isMatch == False:
+            requestRes = base_pb2.requestResources()
+            requestRes.cmd = 17
+            requestRes.code = 1
+            self.writeData(requestRes.SerializeToString())
+            self.progressDialog = QProgressDialog(self)
+            self.progressDialog.setRange(0, 0)
+            # self.progressDialog.setWindowFlags(Qt.WindowMaximizeButtonHint | Qt.MSWindowsFixedSizeDialogHint)
+            self.progressDialog.setCancelButtonText('取消匹配')
+            self.progressDialog.canceled.connect(self.progressDialogpdCanceled)
+            self.isMatch = True  # 是否匹配中
+            self.progressDialog.exec()
 
-    def begin(self):
-        pass
+    def progressDialogpdCanceled(self):
+        requestRes = base_pb2.requestResources()
+        requestRes.cmd = 17
+        requestRes.code = 2  # 取消匹配
+        self.writeData(requestRes.SerializeToString())
+        self.isMatch = False
 
     def wantToLose(self):
-        if self.gameStatu == False or self.isBeginGame == False:
+        if self.isBeginGame == False:
             return
         reply = QMessageBox.question(self, '提示', '您确定要认输吗?', QMessageBox.Yes | QMessageBox.No)
         if reply == QMessageBox.No:
@@ -302,7 +311,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.writeData(w_w.SerializeToString())
 
     def draw(self):
-        if self.gameStatu == False or self.isBeginGame == False:
+        if self.isBeginGame == False:
             return
         reply = QMessageBox.question(self, '提示', '您确定要和棋吗?', QMessageBox.Yes | QMessageBox.No)
         if reply == QMessageBox.No:
@@ -328,7 +337,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.writeData(w_d.SerializeToString())
 
     def huiBack(self):
-        if self.gameStatu == False and len(self.history) == 0:
+        if len(self.history) == 0:
             return
         m = self.history.pop()
         a = self.history2.pop()
@@ -342,17 +351,16 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             self.turnChessColor = "black"
 
     def readData(self):
-        readData = self.sock.readAll()
+        headerData = self.sock.read(4)
+        dataLen = int.from_bytes(headerData, byteorder='little', signed=False)
+        readData = self.sock.read(dataLen)
         if readData == b'':
             return
-
         cmd = base_pb2.cmd()
-        try:
-            cmd.ParseFromString(readData.data())
-        except:
-            pass
-        print("cmd: %s" % cmd.c)
-        self.switch[cmd.c](readData.data())
+        cmd.ParseFromString(readData)
+        if cmd.c != 9:
+            print("cmd: %s" % cmd.c)
+        self.switch[cmd.c](readData)
 
     def writeData(self, data):
         print("writeData")
@@ -360,7 +368,6 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         wData = QDataStream(headerData, QIODevice.WriteOnly)
         wData.writeUInt32(socket.htonl(len(data)))
         self.sock.write(headerData + data)
-        self.sock.waitForBytesWritten()
         self.sock.flush()
 
     def cmd7(self, data):
@@ -383,6 +390,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         slm = QStringListModel()
         slm.setStringList(self.peopleList)
         self.listView.setModel(slm)
+        self.label_6.setText('在线人数：%s人' % (len(self.peopleList) + 1))
 
     def cmd10(self, data):
         s_g_i = base_pb2.server_game_invite()
@@ -487,6 +495,16 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         elif w_d.nums == 2:
             self.huiBack()
             self.huiBack()
+
+    def cmd18(self, data):
+        requestRes = base_pb2.requestResources()
+        requestRes.ParseFromString(data)
+        if requestRes.code == 1:
+            self.isBeginGame = True
+            self.isCanXia = True
+            self.initBeginGame()
+            self.isMatch = False
+            self.progressDialog.close()
 
     def insertChatMessage(self, s):
         self.textBrowser.append(s)

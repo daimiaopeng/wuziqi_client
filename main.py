@@ -43,7 +43,7 @@ class MyWindow(QMainWindow, login_ui.Ui_MainWindow):
         client_login.cmd = 2
         client_login.username = self.lineEdit.text()
         client_login.passwd = self.lineEdit_2.text()
-        if client_login.username == "" and client_login.username == "":
+        if client_login.username == "" or client_login.passwd == "":
             QMessageBox.warning(self, '警告', '用户名或密码为空', QMessageBox.Ok)
             return
         wData = QByteArray(client_login.SerializeToString())
@@ -56,13 +56,15 @@ class MyWindow(QMainWindow, login_ui.Ui_MainWindow):
         self.reg.show()
 
     def readData(self):
-        readData = self.sock.readAll()
+        headerData = self.sock.read(4)
+        dataLen = int.from_bytes(headerData, byteorder='little', signed=False)
+        readData = self.sock.read(dataLen)
         if readData == b'':
             return
-
         cmd = base_pb2.cmd()
-        cmd.ParseFromString(readData.data())
-        self.switch[cmd.c](readData.data())
+        cmd.ParseFromString(readData)
+        print("cmd: %s" % cmd.c)
+        self.switch[cmd.c](readData)
 
     def writeData(self, data):
         headerData = QByteArray()
@@ -78,8 +80,8 @@ class MyWindow(QMainWindow, login_ui.Ui_MainWindow):
         if s_l.isSuccess == 0:
             QMessageBox.warning(self, '警告', s_l.message, QMessageBox.Ok)
             return
-        self.sock.readyRead.disconnect(self.readData)
         self.g = game.PlayGame(self.sock, self.username)
+        self.sock.readyRead.disconnect(self.readData)
         self.g.show()
         self.close()
 

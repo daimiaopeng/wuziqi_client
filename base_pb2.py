@@ -15,7 +15,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\nbase.proto\"\x10\n\x03\x63md\x12\t\n\x01\x63\x18\x01 \x01(\x05\";\n\x16\x63lient_gobang_position\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\t\n\x01x\x18\x02 \x01(\x05\x12\t\n\x01y\x18\x03 \x01(\x05\";\n\x16server_gobang_position\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\t\n\x01x\x18\x02 \x01(\x05\x12\t\n\x01y\x18\x03 \x01(\x05\"=\n\x0c\x63lient_login\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x0e\n\x06passwd\x18\x03 \x01(\t\"?\n\x0cserver_login\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x11\n\tisSuccess\x18\x02 \x01(\x05\x12\x0f\n\x07message\x18\x03 \x01(\t\"r\n\x0f\x63lient_register\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x0e\n\x06passwd\x18\x03 \x01(\t\x12\x0f\n\x07nicheng\x18\x04 \x01(\t\x12\r\n\x05\x65mail\x18\x05 \x01(\t\x12\x10\n\x08touxiang\x18\x06 \x01(\t\"B\n\x0fserver_register\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x11\n\tisSuccess\x18\x02 \x01(\x05\x12\x0f\n\x07message\x18\x03 \x01(\t\"7\n\x12\x63lient_create_game\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x14\n\x0cwithUsername\x18\x02 \x01(\t\"2\n\x13server_online_infor\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0e\n\x06people\x18\x02 \x03(\t\"1\n\x12server_game_invite\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0e\n\x06people\x18\x02 \x01(\t\"/\n\x12\x63lient_game_invite\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04\x63ode\x18\x02 \x01(\x05\"1\n\x14server_game_isInvite\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04\x63ode\x18\x02 \x01(\x05\"#\n\x04test\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0e\n\x06inform\x18\x02 \x01(\t\"D\n\x0b\x63hatMessage\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\t\x12\x0c\n\x04time\x18\x03 \x01(\t\x12\x0c\n\x04type\x18\x04 \x01(\x05\"\xbe\x01\n\x11server_user_infor\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x10\n\x08integral\x18\x03 \x01(\x05\x12\r\n\x05level\x18\x04 \x01(\x05\x12\x10\n\x08numsGame\x18\x05 \x01(\x05\x12\x0b\n\x03win\x18\x06 \x01(\x05\x12\x0c\n\x04lose\x18\x07 \x01(\x05\x12\x0c\n\x04\x64raw\x18\x08 \x01(\x05\x12\x14\n\x0cgameCurrency\x18\t \x01(\x05\x12\x0e\n\x06\x61vatar\x18\n \x01(\t\x12\x0c\n\x04\x63ode\x18\x0b \x01(\x05\"0\n\x06whoWin\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04\x63ode\x18\x02 \x01(\x05\x12\x0b\n\x03win\x18\x03 \x01(\t\"%\n\x08withDraw\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04nums\x18\x02 \x01(\x05\x62\x06proto3'
+    serialized_pb=b'\n\nbase.proto\"\x10\n\x03\x63md\x12\t\n\x01\x63\x18\x01 \x01(\x05\";\n\x16\x63lient_gobang_position\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\t\n\x01x\x18\x02 \x01(\x05\x12\t\n\x01y\x18\x03 \x01(\x05\";\n\x16server_gobang_position\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\t\n\x01x\x18\x02 \x01(\x05\x12\t\n\x01y\x18\x03 \x01(\x05\"=\n\x0c\x63lient_login\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x0e\n\x06passwd\x18\x03 \x01(\t\"?\n\x0cserver_login\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x11\n\tisSuccess\x18\x02 \x01(\x05\x12\x0f\n\x07message\x18\x03 \x01(\t\"r\n\x0f\x63lient_register\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x0e\n\x06passwd\x18\x03 \x01(\t\x12\x0f\n\x07nicheng\x18\x04 \x01(\t\x12\r\n\x05\x65mail\x18\x05 \x01(\t\x12\x10\n\x08touxiang\x18\x06 \x01(\t\"B\n\x0fserver_register\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x11\n\tisSuccess\x18\x02 \x01(\x05\x12\x0f\n\x07message\x18\x03 \x01(\t\"7\n\x12\x63lient_create_game\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x14\n\x0cwithUsername\x18\x02 \x01(\t\"2\n\x13server_online_infor\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0e\n\x06people\x18\x02 \x03(\t\"1\n\x12server_game_invite\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0e\n\x06people\x18\x02 \x01(\t\"/\n\x12\x63lient_game_invite\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04\x63ode\x18\x02 \x01(\x05\"1\n\x14server_game_isInvite\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04\x63ode\x18\x02 \x01(\x05\"#\n\x04test\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0e\n\x06inform\x18\x02 \x01(\t\"D\n\x0b\x63hatMessage\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\t\x12\x0c\n\x04time\x18\x03 \x01(\t\x12\x0c\n\x04type\x18\x04 \x01(\x05\"\xbe\x01\n\x11server_user_infor\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x10\n\x08integral\x18\x03 \x01(\x05\x12\r\n\x05level\x18\x04 \x01(\x05\x12\x10\n\x08numsGame\x18\x05 \x01(\x05\x12\x0b\n\x03win\x18\x06 \x01(\x05\x12\x0c\n\x04lose\x18\x07 \x01(\x05\x12\x0c\n\x04\x64raw\x18\x08 \x01(\x05\x12\x14\n\x0cgameCurrency\x18\t \x01(\x05\x12\x0e\n\x06\x61vatar\x18\n \x01(\t\x12\x0c\n\x04\x63ode\x18\x0b \x01(\x05\"0\n\x06whoWin\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04\x63ode\x18\x02 \x01(\x05\x12\x0b\n\x03win\x18\x03 \x01(\t\"%\n\x08withDraw\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04nums\x18\x02 \x01(\x05\"-\n\x10requestResources\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04\x63ode\x18\x02 \x01(\x05\".\n\x11responseResources\x12\x0b\n\x03\x63md\x18\x01 \x01(\x05\x12\x0c\n\x04\x63ode\x18\x02 \x01(\x05\x62\x06proto3'
 )
 
 
@@ -796,14 +796,88 @@ _WITHDRAW = _descriptor.Descriptor(
   nested_types=[],
   enum_types=[
   ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1076,
-  serialized_end=1113,
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+    ],
+    serialized_start=1076,
+    serialized_end=1113,
+)
+
+_REQUESTRESOURCES = _descriptor.Descriptor(
+    name='requestResources',
+    full_name='requestResources',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='cmd', full_name='requestResources.cmd', index=0,
+            number=1, type=5, cpp_type=1, label=1,
+            has_default_value=False, default_value=0,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='code', full_name='requestResources.code', index=1,
+            number=2, type=5, cpp_type=1, label=1,
+            has_default_value=False, default_value=0,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+    ],
+    extensions=[
+    ],
+    nested_types=[],
+    enum_types=[
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+    ],
+    serialized_start=1115,
+    serialized_end=1160,
+)
+
+_RESPONSERESOURCES = _descriptor.Descriptor(
+    name='responseResources',
+    full_name='responseResources',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='cmd', full_name='responseResources.cmd', index=0,
+            number=1, type=5, cpp_type=1, label=1,
+            has_default_value=False, default_value=0,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='code', full_name='responseResources.code', index=1,
+            number=2, type=5, cpp_type=1, label=1,
+            has_default_value=False, default_value=0,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+    ],
+    extensions=[
+    ],
+    nested_types=[],
+    enum_types=[
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+    ],
+    serialized_start=1162,
+    serialized_end=1208,
 )
 
 DESCRIPTOR.message_types_by_name['cmd'] = _CMD
@@ -823,125 +897,141 @@ DESCRIPTOR.message_types_by_name['chatMessage'] = _CHATMESSAGE
 DESCRIPTOR.message_types_by_name['server_user_infor'] = _SERVER_USER_INFOR
 DESCRIPTOR.message_types_by_name['whoWin'] = _WHOWIN
 DESCRIPTOR.message_types_by_name['withDraw'] = _WITHDRAW
+DESCRIPTOR.message_types_by_name['requestResources'] = _REQUESTRESOURCES
+DESCRIPTOR.message_types_by_name['responseResources'] = _RESPONSERESOURCES
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 cmd = _reflection.GeneratedProtocolMessageType('cmd', (_message.Message,), {
-  'DESCRIPTOR': _CMD,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:cmd)
+    'DESCRIPTOR': _CMD,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:cmd)
 })
 _sym_db.RegisterMessage(cmd)
 
 client_gobang_position = _reflection.GeneratedProtocolMessageType('client_gobang_position', (_message.Message,), {
-  'DESCRIPTOR': _CLIENT_GOBANG_POSITION,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:client_gobang_position)
+    'DESCRIPTOR': _CLIENT_GOBANG_POSITION,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:client_gobang_position)
 })
 _sym_db.RegisterMessage(client_gobang_position)
 
 server_gobang_position = _reflection.GeneratedProtocolMessageType('server_gobang_position', (_message.Message,), {
-  'DESCRIPTOR': _SERVER_GOBANG_POSITION,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:server_gobang_position)
+    'DESCRIPTOR': _SERVER_GOBANG_POSITION,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:server_gobang_position)
 })
 _sym_db.RegisterMessage(server_gobang_position)
 
 client_login = _reflection.GeneratedProtocolMessageType('client_login', (_message.Message,), {
-  'DESCRIPTOR': _CLIENT_LOGIN,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:client_login)
+    'DESCRIPTOR': _CLIENT_LOGIN,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:client_login)
 })
 _sym_db.RegisterMessage(client_login)
 
 server_login = _reflection.GeneratedProtocolMessageType('server_login', (_message.Message,), {
-  'DESCRIPTOR': _SERVER_LOGIN,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:server_login)
+    'DESCRIPTOR': _SERVER_LOGIN,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:server_login)
 })
 _sym_db.RegisterMessage(server_login)
 
 client_register = _reflection.GeneratedProtocolMessageType('client_register', (_message.Message,), {
-  'DESCRIPTOR': _CLIENT_REGISTER,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:client_register)
+    'DESCRIPTOR': _CLIENT_REGISTER,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:client_register)
 })
 _sym_db.RegisterMessage(client_register)
 
 server_register = _reflection.GeneratedProtocolMessageType('server_register', (_message.Message,), {
-  'DESCRIPTOR': _SERVER_REGISTER,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:server_register)
+    'DESCRIPTOR': _SERVER_REGISTER,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:server_register)
 })
 _sym_db.RegisterMessage(server_register)
 
 client_create_game = _reflection.GeneratedProtocolMessageType('client_create_game', (_message.Message,), {
-  'DESCRIPTOR': _CLIENT_CREATE_GAME,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:client_create_game)
+    'DESCRIPTOR': _CLIENT_CREATE_GAME,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:client_create_game)
 })
 _sym_db.RegisterMessage(client_create_game)
 
 server_online_infor = _reflection.GeneratedProtocolMessageType('server_online_infor', (_message.Message,), {
-  'DESCRIPTOR': _SERVER_ONLINE_INFOR,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:server_online_infor)
+    'DESCRIPTOR': _SERVER_ONLINE_INFOR,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:server_online_infor)
 })
 _sym_db.RegisterMessage(server_online_infor)
 
 server_game_invite = _reflection.GeneratedProtocolMessageType('server_game_invite', (_message.Message,), {
-  'DESCRIPTOR': _SERVER_GAME_INVITE,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:server_game_invite)
+    'DESCRIPTOR': _SERVER_GAME_INVITE,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:server_game_invite)
 })
 _sym_db.RegisterMessage(server_game_invite)
 
 client_game_invite = _reflection.GeneratedProtocolMessageType('client_game_invite', (_message.Message,), {
-  'DESCRIPTOR': _CLIENT_GAME_INVITE,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:client_game_invite)
+    'DESCRIPTOR': _CLIENT_GAME_INVITE,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:client_game_invite)
 })
 _sym_db.RegisterMessage(client_game_invite)
 
 server_game_isInvite = _reflection.GeneratedProtocolMessageType('server_game_isInvite', (_message.Message,), {
-  'DESCRIPTOR': _SERVER_GAME_ISINVITE,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:server_game_isInvite)
+    'DESCRIPTOR': _SERVER_GAME_ISINVITE,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:server_game_isInvite)
 })
 _sym_db.RegisterMessage(server_game_isInvite)
 
 test = _reflection.GeneratedProtocolMessageType('test', (_message.Message,), {
-  'DESCRIPTOR': _TEST,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:test)
+    'DESCRIPTOR': _TEST,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:test)
 })
 _sym_db.RegisterMessage(test)
 
 chatMessage = _reflection.GeneratedProtocolMessageType('chatMessage', (_message.Message,), {
-  'DESCRIPTOR': _CHATMESSAGE,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:chatMessage)
+    'DESCRIPTOR': _CHATMESSAGE,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:chatMessage)
 })
 _sym_db.RegisterMessage(chatMessage)
 
 server_user_infor = _reflection.GeneratedProtocolMessageType('server_user_infor', (_message.Message,), {
-  'DESCRIPTOR': _SERVER_USER_INFOR,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:server_user_infor)
+    'DESCRIPTOR': _SERVER_USER_INFOR,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:server_user_infor)
 })
 _sym_db.RegisterMessage(server_user_infor)
 
 whoWin = _reflection.GeneratedProtocolMessageType('whoWin', (_message.Message,), {
-  'DESCRIPTOR': _WHOWIN,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:whoWin)
+    'DESCRIPTOR': _WHOWIN,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:whoWin)
 })
 _sym_db.RegisterMessage(whoWin)
 
 withDraw = _reflection.GeneratedProtocolMessageType('withDraw', (_message.Message,), {
-  'DESCRIPTOR': _WITHDRAW,
-  '__module__': 'base_pb2'
-  # @@protoc_insertion_point(class_scope:withDraw)
+    'DESCRIPTOR': _WITHDRAW,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:withDraw)
 })
 _sym_db.RegisterMessage(withDraw)
+
+requestResources = _reflection.GeneratedProtocolMessageType('requestResources', (_message.Message,), {
+    'DESCRIPTOR': _REQUESTRESOURCES,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:requestResources)
+})
+_sym_db.RegisterMessage(requestResources)
+
+responseResources = _reflection.GeneratedProtocolMessageType('responseResources', (_message.Message,), {
+    'DESCRIPTOR': _RESPONSERESOURCES,
+    '__module__': 'base_pb2'
+    # @@protoc_insertion_point(class_scope:responseResources)
+})
+_sym_db.RegisterMessage(responseResources)
 
 # @@protoc_insertion_point(module_scope)
