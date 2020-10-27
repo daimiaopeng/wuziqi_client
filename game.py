@@ -1,7 +1,7 @@
 import socket
 import time
 import base_pb2
-import button as MyButton
+import setting
 import main_ui
 import base64
 from chessman import *
@@ -34,11 +34,12 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.sound_piece = QSound("source/luozisheng.wav")
         self.sound_win = QSound("source/win.wav")
         self.sound_defeated = QSound("source/defeated.wav")
+        self.sound_piece_t = self.sound_piece
+        self.sound_win_t = self.sound_win
+        self.sound_defeated_t = self.sound_defeated
         self.comboBox.currentIndexChanged.connect(self.messageSend)
         self.listView.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.chessboard = [[None for i in range(19)] for i in range(19)]
-        self.turnChessColor = 'black'
-        self.myColor = self.turnChessColor
         self.history = []
         self.history2 = []
         self.is_over = False
@@ -46,8 +47,11 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.isMatch = False
         self.init()
         self.initBeginGame()
-
+        self.setting = setting.Setting(self)
+        self.isCloseChat = False
         self.lcdNumber.setMode(QLCDNumber.Dec)
+        self.lcdNumber_3.setMode(QLCDNumber.Dec)
+        self.lcdNumber_3.setSegmentStyle(QLCDNumber.Flat)
         # self.lcdNumber.setStyleSheet("border: 2px solid black; color: red; ")
         self.time = QTimer(self)
         self.time.setInterval(1000)
@@ -65,6 +69,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.pushButton_4.clicked.connect(self.beginGame)
         self.pushButton_5.clicked.connect(self.wantToLose)
         self.pushButton_3.clicked.connect(self.draw)
+        self.pushButton_6.clicked.connect(self.setUp)
         self.focusPoint = QLabel(self)
         self.focusPoint.setPixmap(QPixmap("source/标识.png"))
         self.pushButton.setShortcut(QKeySequence(Qt.Key_Enter))
@@ -77,11 +82,30 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             self.pushButton_5.setEnabled(True)
             self.pushButton_4.setEnabled(False)
             self.time.start()
+            self.reStart()
+            if self.myColor == 'black':
+                self.label_2.setPixmap(QPixmap(r'source\black.png'))
+                self.label_5.setPixmap(QPixmap(r'source\white.png'))
+                if self.isCanXia:
+                    self.turnChessColor = 'black'
+                else:
+                    self.turnChessColor = 'white'
+            elif self.myColor == 'white':
+                self.label_2.setPixmap(QPixmap(r'source\white.png'))
+                self.label_5.setPixmap(QPixmap(r'source\black.png'))
+                if self.isCanXia:
+                    self.turnChessColor = 'white'
+                else:
+                    self.turnChessColor = 'black'
         else:
             self.pushButton_2.setEnabled(False)
             self.pushButton_3.setEnabled(False)
             self.pushButton_4.setEnabled(True)
             self.pushButton_5.setEnabled(False)
+        if self.isCanXia:
+            self.label.setCursor(QCursor(Qt.PointingHandCursor))
+        else:
+            self.label.setCursor(QCursor(Qt.ForbiddenCursor))
         self.endDate = QDateTime.currentMSecsSinceEpoch() + 1000 * 60 * 10
         self.endDateOther = self.endDate
 
@@ -253,7 +277,6 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.isCanXia = False
         self.isMatch = False
         self.initBeginGame()
-        self.label.setCursor(QCursor(Qt.ForbiddenCursor))
         self.time.stop()
 
     def reStart(self):
@@ -321,6 +344,10 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         w_w.code = 3
         w_w.win = ''
         self.writeData(w_w.SerializeToString())
+
+    def setUp(self):
+        self.setting.setWindowModality(Qt.WindowModal)
+        self.setting.show()
 
     def withdraw(self):
         w_d = base_pb2.withDraw()
@@ -390,7 +417,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         slm = QStringListModel()
         slm.setStringList(self.peopleList)
         self.listView.setModel(slm)
-        self.label_6.setText('在线人数：%s人' % (len(self.peopleList) + 1))
+        self.lcdNumber_3.display(len(self.peopleList) + 1)
 
     def cmd10(self, data):
         s_g_i = base_pb2.server_game_invite()
@@ -401,8 +428,8 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         if reply == QMessageBox.Yes:
             c_g_i.code = 1
             self.isBeginGame = True
-            self.initBeginGame()
             self.myColor = "white"
+            self.initBeginGame()
         else:
             c_g_i.code = 0
             pass
@@ -414,12 +441,11 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         reply = ""
         self.fightBox.close()
         if s_g_i.code == 1:
-            reply = "对方接受了请求"
+            reply = '对方接受了请求'
             self.isBeginGame = True
-            self.initBeginGame()
             self.isCanXia = True
-            self.label.setCursor(QCursor(Qt.PointingHandCursor))
-            self.myColor = "black"
+            self.myColor = 'black'
+            self.initBeginGame()
         elif s_g_i.code == 0:
             reply = "对方拒绝了请求"
 
@@ -431,7 +457,8 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         messagetype = c_m.type
         string = c_m.data
         messageTime = c_m.time
-
+        if self.isCloseChat == True:
+            return
         s = '<font color=#F9904A>对手 %s </font> <br>%s' % (messageTime, string)
         if messagetype == 1:  # 文字信息
             self.insertChatMessage(s)
@@ -440,7 +467,6 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         s_u_i = base_pb2.server_user_infor()
         s_u_i.ParseFromString(data)
         self.userGameInfor = s_u_i
-
         s = """昵称:%-5s\n积分：%-5s  级别：%-5s\n总盘数：%-4s 游戏币：%-5s\n胜：%-5s 负：%-5s平：%-5s
         """ % (
             s_u_i.name, s_u_i.integral, s_u_i.level, s_u_i.numsGame, s_u_i.gameCurrency, s_u_i.win, s_u_i.lose,
@@ -457,12 +483,6 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             self.label_12.setFixedSize(img.size())
             self.label_12.setScaledContents(True)
             self.label_4.setText(s)
-        if self.myColor == 'black':
-            self.label_2.setPixmap(QPixmap(r'source\black.png'))
-            self.label_5.setPixmap(QPixmap(r'source\white.png'))
-        else:
-            self.label_2.setPixmap(QPixmap(r'source\white.png'))
-            self.label_5.setPixmap(QPixmap(r'source\black.png'))
 
     def cmd15(self, data):
         w_w = base_pb2.whoWin()
@@ -497,14 +517,21 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             self.huiBack()
 
     def cmd18(self, data):
-        requestRes = base_pb2.requestResources()
+        requestRes = base_pb2.responseResources()
         requestRes.ParseFromString(data)
         if requestRes.code == 1:
-            self.isBeginGame = True
-            self.isCanXia = True
-            self.initBeginGame()
-            self.isMatch = False
             self.progressDialog.close()
+            if requestRes.code2 == 1:
+                self.myColor = 'white'
+                self.isCanXia = False
+                self.label.setCursor(QCursor(Qt.PointingHandCursor))
+            elif requestRes.code2 == 2:
+                self.myColor = 'black'
+                self.isCanXia = True
+                self.label.setCursor(QCursor(Qt.ForbiddenCursor))
+            self.isBeginGame = True
+            self.isMatch = False
+            self.initBeginGame()
 
     def insertChatMessage(self, s):
         self.textBrowser.append(s)
@@ -545,6 +572,10 @@ class PlayGame(QWidget, main_ui.Ui_Form):
     def messageSend(self):
         if self.comboBox.lineEdit().text() == "":
             return
+        if self.isCloseChat == True:
+            s = '<font color=#FF0000>您已开启消息屏蔽功能，暂时无法发送消息，如有需要请在设置面板中开启</font>'
+            self.insertChatMessage(s)
+            return
         c_m = base_pb2.chatMessage()
         c_m.cmd = 13
         c_m.type = 1
@@ -553,3 +584,22 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         s = '<font color="#F9904A">我 %s </font> <br>%s' % (c_m.time, self.comboBox.lineEdit().text())
         self.insertChatMessage(s)
         self.writeData(c_m.SerializeToString())
+
+    def soundSetting(self, state):
+        if state == 2:  # 点击，关闭
+            self.sound_piece = QSound('')
+            self.sound_win = QSound('')
+            self.sound_defeated = QSound('')
+        else:
+            self.sound_piece = self.sound_piece_t
+            self.sound_win = self.sound_win_t
+            self.sound_defeated = self.sound_defeated_t
+
+    def chatSetting(self, state):
+        if state == 2:  # 点击，关闭
+            self.isCloseChat = True
+            s = '<font color=#FF0000>您已开启消息屏蔽功能</font>'
+        else:
+            self.isCloseChat = False
+            s = '<font color=#FF0000>您已取消消息屏蔽功能</font>'
+        self.insertChatMessage(s)
