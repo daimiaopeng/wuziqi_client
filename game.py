@@ -19,6 +19,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.isCanXia = False
         self.label.setCursor(QCursor(Qt.ForbiddenCursor))
         self.username = username
+        self.setFixedSize(self.width(), self.height())
         self.sock.readyRead.connect(self.readData)
         self.switch = {
             7: self.cmd7,
@@ -300,8 +301,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             self.writeData(requestRes.SerializeToString())
             self.progressDialog = QProgressDialog(self)
             self.progressDialog.setRange(0, 0)
-            # self.progressDialog.setWindowFlags(Qt.WindowMaximizeButtonHint | Qt.MSWindowsFixedSizeDialogHint)
-            self.progressDialog.setCancelButtonText('取消匹配')
+            self.progressDialog.setWindowTitle('正在等待对面回应')
             self.progressDialog.canceled.connect(self.progressDialogpdCanceled)
             self.isMatch = True  # 是否匹配中
             self.progressDialog.exec()
@@ -353,13 +353,8 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         w_d = base_pb2.withDraw()
         w_d.cmd = 16
         if self.isCanXia:  # 自己回合
-            self.huiBack()
-            self.huiBack()
             w_d.nums = 2
         else:
-            self.huiBack()
-            self.isCanXia = True
-            self.label.setCursor(QCursor(Qt.PointingHandCursor))
             w_d.nums = 1
         self.writeData(w_d.SerializeToString())
 
@@ -508,30 +503,49 @@ class PlayGame(QWidget, main_ui.Ui_Form):
     def cmd16(self, data):
         w_d = base_pb2.withDraw()
         w_d.ParseFromString(data)
-        if w_d.nums == 1:
-            self.huiBack()
-            self.isCanXia = False
-            self.label.setCursor(QCursor(Qt.ForbiddenCursor))
-        elif w_d.nums == 2:
-            self.huiBack()
-            self.huiBack()
+        requestRes = base_pb2.responseResources()
+        requestRes.cmd = 17
+        reply = QMessageBox.question(self, '提示', '对方请求悔棋', QMessageBox.Yes | QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            requestRes.code = 3
+            if w_d.nums == 1:
+                self.huiBack()
+                self.isCanXia = False
+                self.label.setCursor(QCursor(Qt.ForbiddenCursor))
+            elif w_d.nums == 2:
+                self.huiBack()
+                self.huiBack()
+        else:
+            requestRes.code = 4
+        self.writeData(requestRes.SerializeToString())
 
     def cmd18(self, data):
-        requestRes = base_pb2.responseResources()
-        requestRes.ParseFromString(data)
-        if requestRes.code == 1:
+        resResources = base_pb2.responseResources()
+        resResources.ParseFromString(data)
+        if resResources.code == 1:
             self.progressDialog.close()
-            if requestRes.code2 == 1:
+            if resResources.code2 == 1:
                 self.myColor = 'white'
                 self.isCanXia = False
                 self.label.setCursor(QCursor(Qt.PointingHandCursor))
-            elif requestRes.code2 == 2:
+            elif resResources.code2 == 2:
                 self.myColor = 'black'
                 self.isCanXia = True
                 self.label.setCursor(QCursor(Qt.ForbiddenCursor))
             self.isBeginGame = True
             self.isMatch = False
             self.initBeginGame()
+        elif resResources.code == 2:
+            if resResources.code2 == 1:
+                if self.isCanXia:  # 自己回合
+                    self.huiBack()
+                    self.huiBack()
+                else:
+                    self.huiBack()
+                    self.isCanXia = True
+                    self.label.setCursor(QCursor(Qt.PointingHandCursor))
+            elif resResources.code2 == 2:
+                QMessageBox.information(self, '提示', '对方不同意悔棋', QMessageBox.Ok)
 
     def insertChatMessage(self, s):
         self.textBrowser.append(s)
