@@ -75,6 +75,12 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.focusPoint.setPixmap(QPixmap("source/标识.png"))
         self.pushButton.setShortcut(QKeySequence(Qt.Key_Enter))
         self.pushButton.setShortcut(QKeySequence(Qt.Key_Return))
+        self.label_9.setText('在线列表（点击发起对战）：')
+        palette = QPalette()
+        pix = QPixmap('source/background.png')
+        pix = pix.scaled(self.width(), self.height())
+        palette.setBrush(QtGui.QPalette.Background, QtGui.QBrush(pix))
+        self.setPalette(palette)
 
     def initBeginGame(self):
         if self.isBeginGame:
@@ -454,7 +460,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         messageTime = c_m.time
         if self.isCloseChat == True:
             return
-        s = '<font color=#F9904A>对手 %s </font> <br>%s' % (messageTime, string)
+        s = '<font color=#F9904A>对手 %s </font> <br><font color="#ffa500">%s</font>' % (messageTime, string)
         if messagetype == 1:  # 文字信息
             self.insertChatMessage(s)
 
@@ -466,6 +472,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         """ % (
             s_u_i.name, s_u_i.integral, s_u_i.level, s_u_i.numsGame, s_u_i.gameCurrency, s_u_i.win, s_u_i.lose,
             s_u_i.draw)
+        print(s)
         img_src = r'source\avatar\%s.png' % s_u_i.avatar
         img = QPixmap(img_src)
         if s_u_i.code == 1:
@@ -595,7 +602,8 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         c_m.type = 1
         c_m.time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         c_m.data = self.comboBox.lineEdit().text()
-        s = '<font color="#F9904A">我 %s </font> <br>%s' % (c_m.time, self.comboBox.lineEdit().text())
+        s = '<font color="#6497ed">我 %s </font> <br><font color="#ffa500">%s</font>' % (
+        c_m.time, self.comboBox.lineEdit().text())
         self.insertChatMessage(s)
         self.writeData(c_m.SerializeToString())
 

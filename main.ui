@@ -2,1653 +2,679 @@
 <ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1159</width>
+    <height>642</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/************* 左侧管理工具栏 ***************/
+    QWidget#mangeWidget, #listItemWidget, #musicMangeScrollAreaWidget {
+    background-color: #f5f5f7;
+    }
+    QListWidget#musicMangeListWidget {
+    border: none;
+    outline: none;
+    background-color: #f5f5f7;
+    }
+    QListWidget#musicMangeListWidget::item {
+    background-color: #f5f5f7;
+    border: solid
+    }
+    QListWidget#musicMangeListWidget::item:hover {
+    background-color: #f5f5f7;
+    }
+    QListWidget#musicMangeListWidget::item:selected {
+    background-color: #e6e7ea;
+    border-left-width: 4px;
+    border-left-color: #c62f2f;
+    }
+    QLabel#boxTitleLabel, #toolboxNameLabel {
+    color: #696969;
+    font-family: &quot;Microsoft Yahei&quot;;
+    font-size: 9pt;
+    background-color: #f5f5f7;
+    }
+    QScrollArea#musicMangeScrollArea {
+    border: 0px solid;
+    border-right-width: 1px;
+    border-right-color: #dcdbdc;
+    background-color: #f5f5f7;
+    }
+    QScrollBar:vertical {
+    border: none;
+    background: #f5f5f7;
+    width: 10px;
+    margin: 0px 0 0px 0;
+    }
+    QScrollBar::handle:vertical {
+    background: Gainsboro;
+    min-height: 20px;
+    border-radius: 5px;
+    border: none;
+    }
+    QScrollBar::add-line:vertical {
+    border: 0px solid grey;
+    background: #32CC99;
+    height: 0px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+    }
+    QScrollBar::sub-line:vertical {
+    border: 0px solid grey;
+    background: #32CC99;
+    height: 0px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+    }
+    QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+    width: 0px;
+    height: 0px;
+    }
+    QPushButton#playListTitleButton, #openListButton,
+    #createPLayListButton {
+    border: none;
+    }
+    QPushButton#playListTitleButton {
+    text-align : left;
+    color: #696969;
+    font-family: &quot;Microsoft Yahei&quot;;
+    font-size: 9pt;
+    background-color: #f5f5f7;
+    }
+   </string>
+  </property>
+  <widget class="QLabel" name="label">
    <property name="geometry">
-     <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>1161</width>
-       <height>636</height>
-     </rect>
+    <rect>
+     <x>290</x>
+     <y>30</y>
+     <width>540</width>
+     <height>540</height>
+    </rect>
    </property>
-   <property name="windowTitle">
-     <string>Form</string>
+   <property name="cursor">
+    <cursorShape>ArrowCursor</cursorShape>
    </property>
-   <property name="styleSheet">
-     <string notr="true">
-       /**
-       * Qt like CSS for doxygen based on 1.8.6
-       *
-       * Frank Enderle &lt;frank.enderle@anamica.de&gt;
-       */
-
-       body, table, div, p, dl {
-       font: 400 13px/1.3 Verdana,DejaVu Sans,Geneva,sans-serif;
-       }
-
-       /* @group Heading Levels */
-
-       h1.groupheader {
-       font-size: 16px;
-       }
-
-       .title {
-       font: 700 18px Verdana,DejaVu Sans,Geneva,sans-serif;
-       margin: 10px 2px;
-       }
-
-       h2.groupheader {
-       border: 0;
-       color: #363534;
-       font-size: 16px;
-       font-weight: 600;
-       }
-
-       h3.groupheader {
-       font-size: 13px;
-       }
-
-       h1, h2, h3, h4, h5, h6 {
-       -webkit-transition: none;
-       -moz-transition: none;
-       -ms-transition: none;
-       -o-transition: none;
-       transition: none;
-       }
-
-       h1.glow, h2.glow, h3.glow, h4.glow, h5.glow, h6.glow {
-       text-shadow: none;
-       }
-
-       dt {
-       }
-
-       div.multicol {
-       }
-
-       p.startli, p.startdd {
-       }
-
-       p.starttd {
-       }
-
-       p.endli {
-       }
-
-       p.enddd {
-       }
-
-       p.endtd {
-       }
-
-       /* @end */
-
-       caption {
-       }
-
-       span.legend {
-       }
-
-       h3.version {
-       }
-
-       div.qindex, div.navtab {
-       background-color: #F6F6F6;
-       border: 1px solid #E6E6E6;
-       }
-
-       div.qindex, div.navpath {
-       line-height: 1.5;
-       }
-
-       div.navtab {
-       }
-
-       /* @group Link Styling */
-
-       a {
-       color: #00732F;
-       }
-
-       .contents a:visited {
-       color: #00732F;
-       }
-
-       a:hover {
-       text-decoration: none;
-       }
-
-       a.qindex {
-       }
-
-       a.qindexHL {
-       }
-
-       .contents a.qindexHL:visited {
-       }
-
-       a.el {
-       font-weight: normal;
-       }
-
-       a.elRef {
-       }
-
-       a.code, a.code:visited, a.line, a.line:visited {
-       color: #00732F;
-       }
-
-       a.codeRef, a.codeRef:visited, a.lineRef, a.lineRef:visited {
-       color: #00732F;
-       }
-
-       /* @end */
-
-       dl.el {
-       }
-
-       pre.fragment {
-       }
-
-       div.fragment {
-       }
-
-       div.line {
-       -webkit-transition-duration: 0;
-       -moz-transition-duration: 0;
-       -ms-transition-duration: 0;
-       -o-transition-duration: 0;
-       transition-duration: 0;
-       }
-
-       div.line.glow {
-       background-color: auto;
-       box-shadow: none;
-       }
-
-       span.lineno {
-       }
-
-       span.lineno a {
-       }
-
-       span.lineno a:hover {
-       }
-
-       div.ah {
-       background: none;
-       background-color: #F6F6F6;
-       color: #66666E;
-       border: 1px solid #E6E6E6;
-       border-radius: 7px;
-       -webkit-border-radius: 7px;
-       -moz-border-radius: 7px;
-       box-shadow: none;
-       -webkit-box-shadow: none;
-       -moz-box-shadow: none;
-       }
-
-       div.groupHeader {
-       }
-
-       div.groupText {
-       }
-
-       body {
-       color: #363534;
-       }
-
-       div.contents {
-       }
-
-       td.indexkey {
-       }
-
-       td.indexvalue {
-       }
-
-       tr.memlist {
-       }
-
-       p.formulaDsp {
-       }
-
-       img.formulaDsp {
-       }
-
-       img.formulaInl {
-       }
-
-       div.center {
-       }
-
-       div.center img {
-       }
-
-       address.footer {
-       }
-
-       img.footer {
-       display: none;
-       }
-
-       /* addition */
-       .footer a:before {
-       content: &quot;Doxygen&quot;;
-       }
-       /* --- */
-
-       /* @group Code Colorization */
-
-       span.keyword {
-       }
-
-       span.keywordtype {
-       }
-
-       span.keywordflow {
-       }
-
-       span.comment {
-       }
-
-       span.preprocessor {
-       }
-
-       span.stringliteral {
-       }
-
-       span.charliteral {
-       }
-
-       span.vhdldigit {
-       }
-
-       span.vhdlchar {
-       }
-
-       span.vhdlkeyword {
-       }
-
-       span.vhdllogic {
-       }
-
-       blockquote {
-       }
-
-       /* @end */
-
-       .search {
-       }
-
-       form.search {
-       }
-
-       input.search {
-       }
-
-       td.tiny {
-       }
-
-       .dirtab {
-       }
-
-       th.dirtab {
-       }
-
-       hr {
-       border-top: 1px solid #E6E6E6;
-       margin: 10px 8px 0 12px;
-       }
-
-       hr.footer {
-       }
-
-       /* @group Member Descriptions */
-
-       table.memberdecls {
-       font-size: 13px;
-       }
-
-       /* addition */
-
-       table.memberdecls a {
-       font-weight: 600;
-       }
-
-       table.memberdecls .memItemLeft {
-       border: solid #E6E6E6;
-       border-width: 0 0 0 1px;
-       }
-
-       table.memberdecls .memItemRight {
-       border: solid #E6E6E6;
-       border-width: 0 1px 0 0;
-       }
-
-       table.memberdecls tr:nth-child(2) .memItemLeft {
-       border-top-width: 1px;
-       border-top-left-radius: 7px;
-       padding-top: 6px;
-       }
-
-       table.memberdecls tr:nth-child(2) .memItemRight {
-       border-top-width: 1px;
-       border-top-right-radius: 7px;
-       padding-top: 6px;
-       }
-
-       table.memberdecls tr:nth-last-child(2) .memItemLeft {
-       border-bottom-width: 1px;
-       border-bottom-left-radius: 7px;
-       padding-bottom: 6px;
-       }
-
-       table.memberdecls tr:nth-last-child(2) .memItemRight {
-       border-bottom-width: 1px;
-       border-bottom-right-radius: 7px;
-       padding-bottom: 6px;
-       }
-
-       /* --- */
-
-       .memberdecls td, .fieldtable tr {
-       -webkit-transition-duration: 0;
-       -moz-transition-duration: 0;
-       -ms-transition-duration: 0;
-       -o-transition-duration: 0;
-       transition-duration: 0;
-       }
-
-       .memberdecls td.glow, .fieldtable tr.glow {
-       background-color: auto;
-       box-shadow: 0;
-       }
-
-       .mdescLeft, .mdescRight,
-       .memItemLeft, .memItemRight,
-       .memTemplItemLeft, .memTemplItemRight, .memTemplParams {
-       width: auto;
-       background-color: #F6F6F6;
-       }
-
-       .mdescLeft, .mdescRight {
-       }
-
-       /* addition */
-       .mdescLeft {
-       padding: 3px 10px 3px 15px;
-       }
-
-       .mdescRight {
-       padding: 3px 15px 3px 10px;
-       }
-       /* --- */
-
-       .memSeparator {
-       display: none;
-       }
-
-       .memItemLeft, .memTemplItemLeft {
-       }
-
-       .memItemRight {
-       padding-right: 8px;
-       }
-
-       .memTemplParams {
-       }
-
-       /* @end */
-
-       /* @group Member Details */
-
-       /* Styles for detailed member documentation */
-
-       .memtemplate {
-       }
-
-       .memnav {
-       }
-
-       .mempage {
-       }
-
-       .memitem {
-       margin-bottom: 20px;
-       -webkit-transition-duration: 0;
-       -moz-transition-duration: 0;
-       -ms-transition-duration: 0;
-       -o-transition-duration: 0;
-       transition-duration: 0;
-       }
-
-       .memitem.glow {
-       box-shadow: none;
-       }
-
-       .memname {
-       font-size: 13px;
-       }
-
-       .memname td {
-       }
-
-       .memproto, dl.reflist dt {
-       border: 1px solid #E6E6E6;
-       padding: 5px 10px;
-       color: #363534;
-       text-shadow: none;
-       background: none;
-       background-color: #F6F6F6;
-       box-shadow: none;
-       border-radius: 7px;
-       -moz-box-shadow: none;
-       -moz-border-radius: 7px;
-       -webkit-box-shadow: none;
-       -webkit-border-radius: 7px;
-       }
-
-       /* additional */
-       .memproto .memname {
-       font-weight: bold;
-       }
-
-       .memproto .memname a {
-       font-weight: bold;
-       }
-       /* --- */
-
-       .memdoc, dl.reflist dd {
-       border: 0;
-       padding: 0;
-       background: none;
-       border-radius: 0;
-       box-shadow: none;
-       -moz-border-radius: 0;
-       -moz-box-shadow: none;
-       -webkit-border-radius: 0;
-       -webkit-box-shadow: none;
-       }
-
-       dl.reflist dt {
-       }
-
-       dl.reflist dd {
-       }
-
-       .paramkey {
-       }
-
-       .paramtype {
-       }
-
-       .paramname {
-       color: #363534;
-       }
-
-       .paramname em {
-       }
-
-       .paramname code {
-       }
-
-       .params, .retval, .exception, .tparams {
-       }
-
-       .params .paramname, .retval .paramname {
-       }
-
-       .params .paramtype {
-       }
-
-       .params .paramdir {
-       }
-
-       .mlabels {
-       }
-
-       td.mlabels-left {
-       }
-
-       td.mlabels-right {
-       }
-
-       span.mlabels {
-       }
-
-       span.mlabel {
-       background-color: #E6E6E6;
-       border: 0;
-       color: #66666E;
-       padding: 4px 5px;
-       border-radius: 4px;
-       font-size: 11px;
-       }
-
-       /* @end */
-
-       /* these are for tree view when not used as main index */
-
-       div.directory {
-       border: none;
-       }
-
-       .directory table {
-       }
-
-       .directory td {
-       }
-
-       .directory td.entry {
-       }
-
-       .directory td.entry a {
-       font-weight: bold;
-       }
-
-       .directory td.entry a img {
-       }
-
-       .directory td.desc {
-       border-color: #E6E6E6;
-       }
-
-       .directory tr.even {
-       background: none;
-       }
-
-       .directory img {
-       vertical-align: -30%;
-       }
-
-       .directory .levels {
-       }
-
-       .directory .levels span {
-       }
-
-       div.dynheader {
-       }
-
-       address {
-       }
-
-       table.doxtable {
-       }
-
-       table.doxtable td, table.doxtable th {
-       border: 1px solid #E6E6E6;
-       }
-
-       table.doxtable th {
-       background-color: #F6F6F6;
-       color: #66666E;
-       font-size: 13px;
-       }
-
-       table.fieldtable {
-       padding: 5px 10px;
-       border: 1px solid #E6E6E6;
-       background-color: #F6F6F6;
-       box-shadow: none;
-       border-radius: 7px;
-       -moz-box-shadow: none;
-       -moz-border-radius: 7px;
-       -webkit-box-shadow: none;
-       -webkit-border-radius: 7px;
-       }
-
-       .fieldtable td, .fieldtable th {
-       }
-
-       .fieldtable td.fieldtype, .fieldtable td.fieldname {
-       border: 0;
-       }
-
-       .fieldtable td.fieldname {
-       font-size: 13px;
-       }
-
-       /* additional */
-       .fieldtable td.fieldname em {
-       font-style: normal;
-       }
-       /* --- */
-
-       .fieldtable td.fielddoc {
-       border: 0;
-       font-size: 13px;
-       }
-
-       /* additional */
-       .fieldtable td.fielddoc * {
-       font-size: 13px;
-       }
-       /* --- */
-
-       .fieldtable td.fielddoc p:first-child {
-       margin: auto;
-       }
-
-       .fieldtable td.fielddoc p:last-child {
-       margin: auto;
-       }
-
-       .fieldtable tr:last-child td {
-       }
-
-       .fieldtable th {
-       background: none;
-       background-color: #E6E6E6;
-       font-size: 13px;
-       font-weight: normal;
-       color: #363534;
-       border-radius: 0;
-       -moz-border-radius: 0;
-       -webkit-border-radius: 0;
-       border: 0;
-       }
-
-       .tabsearch {
-       }
-
-       .navpath ul {
-       background: none;
-       background-color: #E6E6E6;
-       color: #363534;
-       border: 0;
-       font-size: 13px;
-       }
-
-       .navpath li {
-       color: #363534;
-       }
-
-       .navpath li.navelem a {
-       color: #363534;
-       }
-
-       .navpath li.navelem a:hover {
-       color: #363534;
-       }
-
-       .navpath li.footer {
-       color: #363534;
-       font-size: 13px;
-       }
-
-       div.summary {
-       margin: 20px;
-       width: auto;
-       display: inline-block;
-       text-align: left;
-       color: transparent;
-       line-height: 0;
-       padding: 15px 25px;
-       border: 1px solid #E6E6E6;
-       background-color: #F6F6F6;
-       border-radius: 7px;
-       -moz-border-radius: 7px;
-       -webkit-border-radius: 7px;
-       font-size: 13px;
-       }
-
-       div.summary a {
-       display: block;
-       line-height: 1.5;
-       }
-
-       div.ingroups {
-       }
-
-       div.ingroups a {
-       }
-
-       div.header {
-       background: none;
-       border: 0;
-       }
-
-       div.headertitle {
-       }
-
-       dl {
-       }
-
-       /* dl.note, dl.warning, dl.attention, dl.pre, dl.post, dl.invariant, dl.deprecated, dl.todo, dl.test, dl.bug */
-       dl.section {
-       }
-
-       dl.note {
-       }
-
-       dl.warning, dl.attention {
-       }
-
-       dl.pre, dl.post, dl.invariant {
-       }
-
-       dl.deprecated {
-       }
-
-       dl.todo {
-       }
-
-       dl.test {
-       }
-
-       dl.bug {
-       }
-
-       dl.section dd {
-       }
-
-       #projectlogo {
-       }
-
-       #projectlogo img {
-       }
-
-       #projectname {
-       font: 24px Verdana,DejaVu Sans,Geneva,sans-serif;
-       font-weight: bold;
-       display: inline;
-       }
-
-       #projectbrief {
-       font: 16px Verdana,DejaVu Sans,Geneva,sans-serif;
-       display: inline;
-       }
-
-       #projectnumber {
-       font: 16px Verdana,DejaVu Sans,Geneva,sans-serif;
-       display: inline;
-       }
-
-       #titlearea {
-       border: 0;
-       background-color: #E6E6E6;
-       }
-
-       .image {
-       }
-
-       .dotgraph {
-       }
-
-       .mscgraph {
-       }
-
-       .diagraph {
-       }
-
-       .caption {
-       }
-
-       div.zoom {
-       }
-
-       dl.citelist {
-       }
-
-       dl.citelist dt {
-       }
-
-       dl.citelist dd {
-       }
-
-       div.toc {
-       }
-
-       div.toc li {
-       }
-
-       div.toc h3 {
-       }
-
-       div.toc ul {
-       }
-
-       div.toc li.level1 {
-       }
-
-       div.toc li.level2 {
-       }
-
-       div.toc li.level3 {
-       }
-
-       div.toc li.level4 {
-       }
-
-       .inherit_header {
-       }
-
-       .inherit_header td {
-       }
-
-       .inherit {
-       }
-
-       tr.heading h2 {
-       }
-
-       /* tooltip related style info */
-
-       .ttc {
-       }
-
-       #powerTip {
-       }
-
-       #powerTip div.ttdoc {
-       }
-
-       #powerTip div.ttname a {
-       }
-
-       #powerTip div.ttname {
-       }
-
-       #powerTip div.ttdeci {
-       }
-
-       #powerTip div {
-       font: 13px/1.3 Verdana,DejaVu Sans,Geneva,sans-serif;
-       color: #363534;
-       }
-
-       #powerTip:before, #powerTip:after {
-       }
-
-       #powerTip.n:after, #powerTip.n:before,
-       #powerTip.s:after, #powerTip.s:before,
-       #powerTip.w:after, #powerTip.w:before,
-       #powerTip.e:after, #powerTip.e:before,
-       #powerTip.ne:after, #powerTip.ne:before,
-       #powerTip.se:after, #powerTip.se:before,
-       #powerTip.nw:after, #powerTip.nw:before,
-       #powerTip.sw:after, #powerTip.sw:before {
-       }
-
-       #powerTip.n:after, #powerTip.s:after,
-       #powerTip.w:after, #powerTip.e:after,
-       #powerTip.nw:after, #powerTip.ne:after,
-       #powerTip.sw:after, #powerTip.se:after {
-       }
-
-       #powerTip.n:before, #powerTip.s:before,
-       #powerTip.w:before, #powerTip.e:before,
-       #powerTip.nw:before, #powerTip.ne:before,
-       #powerTip.sw:before, #powerTip.se:before {
-       }
-
-       #powerTip.n:after, #powerTip.n:before,
-       #powerTip.ne:after, #powerTip.ne:before,
-       #powerTip.nw:after, #powerTip.nw:before {
-       }
-
-       #powerTip.n:after, #powerTip.ne:after, #powerTip.nw:after {
-       }
-       #powerTip.n:before {
-       }
-       #powerTip.n:after, #powerTip.n:before {
-       }
-
-       #powerTip.nw:after, #powerTip.nw:before {
-       }
-
-       #powerTip.ne:after, #powerTip.ne:before {
-       }
-
-       #powerTip.s:after, #powerTip.s:before,
-       #powerTip.se:after, #powerTip.se:before,
-       #powerTip.sw:after, #powerTip.sw:before {
-       }
-
-       #powerTip.s:after, #powerTip.se:after, #powerTip.sw:after {
-       }
-
-       #powerTip.s:before, #powerTip.se:before, #powerTip.sw:before {
-       }
-
-       #powerTip.s:after, #powerTip.s:before {
-       }
-
-       #powerTip.sw:after, #powerTip.sw:before {
-       }
-
-       #powerTip.se:after, #powerTip.se:before {
-       }
-
-       #powerTip.e:after, #powerTip.e:before {
-       }
-
-       #powerTip.e:after {
-       }
-
-       #powerTip.e:before {
-       }
-
-       #powerTip.w:after, #powerTip.w:before {
-       }
-
-       #powerTip.w:after {
-       }
-
-       #powerTip.w:before {
-       }
-
-       /* tabs.css */
-
-       .tabs, .tabs2, .tabs3 {
-       background: none;
-       background-color: #F6F6F6;
-       font: 13px Verdana,DejaVu Sans,Geneva,sans-serif;
-       border-bottom: 1px solid #E6E6E6;
-       }
-
-       .tabs2 {
-       font-size: 13px;
-       }
-       .tabs3 {
-       font-size: 13px;
-       }
-
-       .tablist {
-       }
-
-       .tablist li {
-       background: none;
-       line-height: 1.5;
-       }
-
-       .tablist a {
-       padding: 0 10px;
-       font-weight: normal;
-       background: none;
-       color: #00732F;
-       text-shadow: none;
-       }
-
-       .tabs3 .tablist a {
-       }
-
-       .tablist a:hover {
-       background: none;
-       color: #00732F;
-       text-shadow: none;
-       }
-
-       .tablist li.current a {
-       background: none;
-       color: #00732F;
-       text-shadow: none;
-       }
-
-       /* navtree.css */
-
-       #nav-tree .children_ul {
-       }
-
-       #nav-tree ul {
-       }
-
-       #nav-tree li {
-       }
-
-       #nav-tree .plus {
-       }
-
-       #nav-tree .selected {
-       background: none;
-       background-color: #E6E6E6;
-       color: #00732F;
-       text-shadow: none;
-       }
-
-       #nav-tree img {
-       }
-
-       #nav-tree a {
-       }
-
-       #nav-tree .label {
-       font: 12px Verdana,DejaVu Sans,Geneva,sans-serif;
-       }
-
-       #nav-tree .label a {
-       }
-
-       #nav-tree .selected a {
-       color: #00732F;
-       }
-
-       #nav-tree .children_ul {
-       }
-
-       #nav-tree .item {
-       }
-
-       #nav-tree {
-       background-color: #F6F6F6;
-       }
-
-       #doc-content {
-       }
-
-       #side-nav {
-       }
-
-       .ui-resizable .ui-resizable-handle {
-       }
-
-       .ui-resizable-e {
-       background: none;
-       background-color: #E6E6E6;
-       }
-
-       .ui-resizable-handle {
-       }
-
-       #nav-tree-contents {
-       }
-
-       #nav-tree {
-       background: none;
-       background-color: #F6F6F6;
-       }
-
-       #nav-sync {
-       }
-
-       #nav-sync img {
-       }
-
-       #nav-sync img:hover {
-       }
-     </string>
+   <property name="inputMethodHints">
+    <set>Qt::ImhNone</set>
    </property>
-   <widget class="QLabel" name="label">
-     <property name="geometry">
-       <rect>
-         <x>290</x>
-         <y>40</y>
-         <width>540</width>
-         <height>540</height>
-       </rect>
-     </property>
-     <property name="cursor">
-       <cursorShape>ArrowCursor</cursorShape>
-     </property>
-     <property name="inputMethodHints">
-       <set>Qt::ImhNone</set>
-     </property>
-     <property name="text">
-       <string/>
-     </property>
-     <property name="pixmap">
-       <pixmap>source/chessboard.jpg</pixmap>
-     </property>
-     <property name="buddy">
-       <cstring>listView</cstring>
-     </property>
-   </widget>
-   <widget class="QLabel" name="label_11">
-     <property name="enabled">
-       <bool>true</bool>
-     </property>
-     <property name="geometry">
-       <rect>
-         <x>77</x>
-         <y>30</y>
-         <width>128</width>
-         <height>128</height>
-       </rect>
-     </property>
-     <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>100</horstretch>
-         <verstretch>123</verstretch>
-       </sizepolicy>
-     </property>
-     <property name="text">
-       <string/>
-     </property>
-     <property name="pixmap">
-       <pixmap>source/avatar/1.png</pixmap>
-     </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-     <property name="geometry">
-       <rect>
-         <x>47</x>
-         <y>160</y>
-         <width>202</width>
-         <height>66</height>
-       </rect>
-     </property>
-     <property name="sizePolicy">
-       <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-       </sizepolicy>
-     </property>
-     <property name="text">
-       <string>昵称:
-         积分：0 级别：0
-         总盘数：0 游戏币：0
-         胜：0 负：0 平：0
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>source/chessboard.jpg</pixmap>
+   </property>
+   <property name="buddy">
+    <cstring>listView</cstring>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>77</x>
+     <y>20</y>
+     <width>128</width>
+     <height>128</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>100</horstretch>
+     <verstretch>123</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>source/avatar/1.png</pixmap>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>47</x>
+     <y>150</y>
+     <width>202</width>
+     <height>66</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string>积分：0 级别：0
+     总盘数：0 游戏币：0
+     胜：0 负：0 平：0
+    </string>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>20</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_2">
+   <property name="geometry">
+    <rect>
+     <x>257</x>
+     <y>20</y>
+     <width>20</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_3">
+   <property name="geometry">
+    <rect>
+     <x>17</x>
+     <y>280</y>
+     <width>251</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_4">
+   <property name="geometry">
+    <rect>
+     <x>17</x>
+     <y>10</y>
+     <width>250</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>230</y>
+     <width>36</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>source/black.png</pixmap>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>47</x>
+     <y>440</y>
+     <width>202</width>
+     <height>66</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string>积分：0 级别：0
+     总盘数：0 游戏币：0
+     胜：0 负：0 平：0
+    </string>
+   </property>
+  </widget>
+  <widget class="Line" name="line_5">
+   <property name="geometry">
+    <rect>
+     <x>17</x>
+     <y>290</y>
+     <width>250</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_6">
+   <property name="geometry">
+    <rect>
+     <x>257</x>
+     <y>300</y>
+     <width>20</width>
+     <height>281</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>520</y>
+     <width>36</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>source/white.png</pixmap>
+   </property>
+  </widget>
+  <widget class="Line" name="line_7">
+   <property name="geometry">
+    <rect>
+     <x>17</x>
+     <y>570</y>
+     <width>251</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_12">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>77</x>
+     <y>310</y>
+     <width>128</width>
+     <height>128</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>100</horstretch>
+     <verstretch>123</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>source/avatar/1.png</pixmap>
+   </property>
+  </widget>
+  <widget class="Line" name="line_8">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>300</y>
+     <width>20</width>
+     <height>281</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="QLCDNumber" name="lcdNumber">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>220</y>
+     <width>101</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="value" stdset="0">
+    <double>0.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QLCDNumber" name="lcdNumber_2">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>510</y>
+     <width>101</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="value" stdset="0">
+    <double>0.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>220</y>
+     <width>61</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;倒计时：&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>510</y>
+     <width>61</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;倒计时：&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>580</y>
+     <width>543</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QPushButton" name="pushButton_6">
+      <property name="font">
+       <font>
+        <family>华文行楷</family>
+        <pointsize>16</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+        <stylestrategy>PreferDefault</stylestrategy>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 16pt &quot;华文行楷&quot;;</string>
+      </property>
+      <property name="text">
+       <string>设置</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="styleSheet">
+       <string notr="true">font: 16pt &quot;华文行楷&quot;;</string>
+      </property>
+      <property name="text">
+       <string>悔棋</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 16pt &quot;华文行楷&quot;;
+        background-image: url(&quot;/source/button.png&quot;);
        </string>
-     </property>
-   </widget>
-   <widget class="Line" name="line">
-     <property name="geometry">
-       <rect>
-         <x>10</x>
-         <y>30</y>
-         <width>20</width>
-         <height>271</height>
-       </rect>
-     </property>
-     <property name="orientation">
-       <enum>Qt::Vertical</enum>
-     </property>
-   </widget>
-   <widget class="Line" name="line_2">
-     <property name="geometry">
-       <rect>
-         <x>257</x>
-         <y>30</y>
-         <width>20</width>
-         <height>271</height>
-       </rect>
-     </property>
-     <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-       </sizepolicy>
-     </property>
-     <property name="orientation">
-       <enum>Qt::Vertical</enum>
-     </property>
-   </widget>
-   <widget class="Line" name="line_3">
-     <property name="geometry">
-       <rect>
-         <x>17</x>
-         <y>290</y>
-         <width>251</width>
-         <height>20</height>
-       </rect>
-     </property>
-     <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-     </property>
-   </widget>
-   <widget class="Line" name="line_4">
-     <property name="geometry">
-       <rect>
-         <x>17</x>
-         <y>20</y>
-         <width>250</width>
-         <height>20</height>
-       </rect>
-     </property>
-     <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-     </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-     <property name="geometry">
-       <rect>
-         <x>40</x>
-         <y>240</y>
-         <width>36</width>
-         <height>36</height>
-       </rect>
-     </property>
-     <property name="text">
-       <string/>
-     </property>
-     <property name="pixmap">
-       <pixmap>source/black.png</pixmap>
-     </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-     <property name="geometry">
-       <rect>
-         <x>47</x>
-         <y>450</y>
-         <width>202</width>
-         <height>66</height>
-       </rect>
-     </property>
-     <property name="sizePolicy">
-       <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-       </sizepolicy>
-     </property>
-     <property name="text">
-       <string>昵称:
-         积分：0 级别：0
-         总盘数：0 游戏币：0
-         胜：0 负：0 平：0
-       </string>
-     </property>
-   </widget>
-   <widget class="Line" name="line_5">
-     <property name="geometry">
-       <rect>
-         <x>17</x>
-         <y>300</y>
-         <width>250</width>
-         <height>20</height>
-       </rect>
-     </property>
-     <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-     </property>
-   </widget>
-   <widget class="Line" name="line_6">
-     <property name="geometry">
-       <rect>
-         <x>257</x>
-         <y>310</y>
-         <width>20</width>
-         <height>281</height>
-       </rect>
-     </property>
-     <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-       </sizepolicy>
-     </property>
-     <property name="orientation">
-       <enum>Qt::Vertical</enum>
-     </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-     <property name="geometry">
-       <rect>
-         <x>40</x>
-         <y>530</y>
-         <width>36</width>
-         <height>36</height>
-       </rect>
-     </property>
-     <property name="text">
-       <string/>
-     </property>
-     <property name="pixmap">
-       <pixmap>source/white.png</pixmap>
-     </property>
-   </widget>
-   <widget class="Line" name="line_7">
-     <property name="geometry">
-       <rect>
-         <x>17</x>
-         <y>580</y>
-         <width>251</width>
-         <height>20</height>
-       </rect>
-     </property>
-     <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-     </property>
-   </widget>
-   <widget class="QLabel" name="label_12">
-     <property name="enabled">
-       <bool>true</bool>
-     </property>
-     <property name="geometry">
-       <rect>
-         <x>77</x>
-         <y>320</y>
-         <width>128</width>
-         <height>128</height>
-       </rect>
-     </property>
-     <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>100</horstretch>
-         <verstretch>123</verstretch>
-       </sizepolicy>
-     </property>
-     <property name="text">
-       <string/>
-     </property>
-     <property name="pixmap">
-       <pixmap>source/avatar/1.png</pixmap>
-     </property>
-   </widget>
-   <widget class="Line" name="line_8">
-     <property name="geometry">
-       <rect>
-         <x>10</x>
-         <y>310</y>
-         <width>20</width>
-         <height>281</height>
-       </rect>
-     </property>
-     <property name="orientation">
-       <enum>Qt::Vertical</enum>
-     </property>
-   </widget>
-   <widget class="QLCDNumber" name="lcdNumber">
-     <property name="geometry">
-       <rect>
-         <x>140</x>
-         <y>230</y>
-         <width>101</width>
-         <height>51</height>
-       </rect>
-     </property>
-     <property name="value" stdset="0">
-       <double>0.000000000000000</double>
-     </property>
-   </widget>
-   <widget class="QLCDNumber" name="lcdNumber_2">
-     <property name="geometry">
-       <rect>
-         <x>140</x>
-         <y>520</y>
-         <width>101</width>
-         <height>51</height>
-       </rect>
-     </property>
-     <property name="value" stdset="0">
-       <double>0.000000000000000</double>
-     </property>
-   </widget>
-   <widget class="QLabel" name="label_7">
-     <property name="geometry">
-       <rect>
-         <x>80</x>
-         <y>230</y>
-         <width>61</width>
-         <height>51</height>
-       </rect>
-     </property>
-     <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;倒计时：&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-   </widget>
-   <widget class="QLabel" name="label_8">
-     <property name="geometry">
-       <rect>
-         <x>80</x>
-         <y>520</y>
-         <width>61</width>
-         <height>51</height>
-       </rect>
-     </property>
-     <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;倒计时：&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-       <rect>
-         <x>290</x>
-         <y>590</y>
-         <width>543</width>
-         <height>40</height>
-       </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-         <widget class="QPushButton" name="pushButton_6">
-           <property name="font">
-             <font>
-               <family>华文行楷</family>
-               <pointsize>16</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <stylestrategy>PreferDefault</stylestrategy>
-             </font>
-           </property>
-           <property name="styleSheet">
-             <string notr="true">font: 16pt &quot;华文行楷&quot;;</string>
-           </property>
-           <property name="text">
-             <string>设置</string>
-           </property>
-         </widget>
-       </item>
-       <item>
-         <widget class="QPushButton" name="pushButton_2">
-           <property name="styleSheet">
-             <string notr="true">font: 16pt &quot;华文行楷&quot;;</string>
-           </property>
-           <property name="text">
-             <string>悔棋</string>
-           </property>
-         </widget>
-       </item>
-       <item>
-         <widget class="QPushButton" name="pushButton_4">
-           <property name="autoFillBackground">
-             <bool>false</bool>
-           </property>
-           <property name="styleSheet">
-             <string notr="true">font: 16pt &quot;华文行楷&quot;;
-               background-image: url(&quot;/source/button.png&quot;);
-             </string>
-           </property>
-           <property name="text">
-             <string>匹配对手</string>
-           </property>
-         </widget>
-       </item>
-       <item>
-         <widget class="QPushButton" name="pushButton_3">
-           <property name="styleSheet">
-             <string notr="true">font: 16pt &quot;华文行楷&quot;;</string>
-           </property>
-           <property name="text">
-             <string>和棋</string>
-           </property>
-         </widget>
-       </item>
-       <item>
-         <widget class="QPushButton" name="pushButton_5">
-           <property name="styleSheet">
-             <string notr="true">font: 16pt &quot;华文行楷&quot;;</string>
-           </property>
-           <property name="text">
-             <string>认输</string>
-           </property>
-         </widget>
-       </item>
+      </property>
+      <property name="text">
+       <string>匹配对手</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="styleSheet">
+       <string notr="true">font: 16pt &quot;华文行楷&quot;;</string>
+      </property>
+      <property name="text">
+       <string>和棋</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="styleSheet">
+       <string notr="true">font: 16pt &quot;华文行楷&quot;;</string>
+      </property>
+      <property name="text">
+       <string>认输</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>850</x>
+     <y>10</y>
+     <width>291</width>
+     <height>601</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetMaximumSize</enum>
+    </property>
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>在线人数：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLCDNumber" name="lcdNumber_3"/>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
      </layout>
-   </widget>
-   <widget class="QWidget" name="">
-     <property name="geometry">
-       <rect>
-         <x>850</x>
-         <y>20</y>
-         <width>301</width>
-         <height>601</height>
-       </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-             <widget class="QLabel" name="label_6">
-               <property name="text">
-                 <string>在线人数：</string>
-               </property>
-             </widget>
-           </item>
-           <item>
-             <widget class="QLCDNumber" name="lcdNumber_3"/>
-           </item>
-           <item>
-             <spacer name="horizontalSpacer">
-               <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                 <size>
-                   <width>40</width>
-                   <height>20</height>
-                 </size>
-               </property>
-             </spacer>
-           </item>
-         </layout>
-       </item>
-       <item row="1" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
-             <widget class="QLabel" name="label_9">
-               <property name="text">
-                 <string>在线列表：</string>
-               </property>
-             </widget>
-           </item>
-           <item>
-             <widget class="QListView" name="listView"/>
-           </item>
-         </layout>
-       </item>
-       <item row="2" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-             <widget class="QTextBrowser" name="textBrowser">
-               <property name="cursor" stdset="0">
-                 <cursorShape>ArrowCursor</cursorShape>
-               </property>
-             </widget>
-           </item>
-           <item>
-             <layout class="QHBoxLayout" name="horizontalLayout">
-               <item>
-                 <widget class="QComboBox" name="comboBox">
-                   <property name="enabled">
-                     <bool>true</bool>
-                   </property>
-                   <property name="tabletTracking">
-                     <bool>false</bool>
-                   </property>
-                   <property name="editable">
-                     <bool>true</bool>
-                   </property>
-                   <property name="currentText">
-                     <string/>
-                   </property>
-                   <property name="currentIndex">
-                     <number>-1</number>
-                   </property>
-                   <property name="insertPolicy">
-                     <enum>QComboBox::NoInsert</enum>
-                   </property>
-                   <item>
-                     <property name="text">
-                       <string>大家好，很高兴见到各位！</string>
-                     </property>
-                   </item>
-                   <item>
-                     <property name="text">
-                       <string>快点吧，我等到花儿也谢了。</string>
-                     </property>
-                   </item>
-                   <item>
-                     <property name="text">
-                       <string>你的牌打得太好了！</string>
-                     </property>
-                   </item>
-                   <item>
-                     <property name="text">
-                       <string>我们交个朋友吧，能告诉我你的联系方法吗？</string>
-                     </property>
-                   </item>
-                   <item>
-                     <property name="text">
-                       <string>各位，真不好意思，我要离开一会。</string>
-                     </property>
-                   </item>
-                   <item>
-                     <property name="text">
-                       <string>又断线了，网络怎么这么差啊！</string>
-                     </property>
-                   </item>
-                   <item>
-                     <property name="text">
-                       <string>不要吵了，有什么好吵的，专心玩游戏吧。</string>
-                     </property>
-                   </item>
-                   <item>
-                     <property name="text">
-                       <string>你是MM，还是GG？</string>
-                     </property>
-                   </item>
-                   <item>
-                     <property name="text">
-                       <string>下次再玩吧，我要走了。</string>
-                     </property>
-                   </item>
-                   <item>
-                     <property name="text">
-                       <string>再见了，我会想念大家的。</string>
-                     </property>
-                   </item>
-                   <item>
-                     <property name="text">
-                       <string>和你合作真是太愉快啦。</string>
-                     </property>
-                   </item>
-                   <item>
-                     <property name="text">
-                       <string>不要走，决战到天亮。</string>
-                     </property>
-                   </item>
-                 </widget>
-               </item>
-               <item>
-                 <widget class="QPushButton" name="pushButton">
-                   <property name="text">
-                     <string>发送</string>
-                   </property>
-                 </widget>
-               </item>
-             </layout>
-           </item>
-         </layout>
-       </item>
+    </item>
+    <item row="1" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>在线列表：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListView" name="listView">
+        <property name="styleSheet">
+         <string notr="true">background-color: #4C4C4C; /*#004100;*/color: #bbbbbb;background-color:transparent</string>
+        </property>
+       </widget>
+      </item>
      </layout>
-   </widget>
-   <zorder>layoutWidget</zorder>
-   <zorder>label_2</zorder>
-   <zorder>lcdNumber</zorder>
-   <zorder>layoutWidget</zorder>
-   <zorder>label</zorder>
-   <zorder>layoutWidget</zorder>
-   <zorder>label_11</zorder>
-   <zorder>label_3</zorder>
-   <zorder>line</zorder>
-   <zorder>line_2</zorder>
-   <zorder>line_3</zorder>
-   <zorder>line_4</zorder>
-   <zorder>label_4</zorder>
-   <zorder>line_5</zorder>
-   <zorder>line_6</zorder>
-   <zorder>label_5</zorder>
-   <zorder>line_7</zorder>
-   <zorder>label_12</zorder>
-   <zorder>line_8</zorder>
-   <zorder>lcdNumber_2</zorder>
-   <zorder>label_7</zorder>
-   <zorder>label_8</zorder>
-   <zorder>formLayoutWidget</zorder>
-   <zorder>label_9</zorder>
-   <zorder>horizontalSpacer</zorder>
+    </item>
+    <item row="2" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QTextBrowser" name="textBrowser">
+        <property name="cursor" stdset="0">
+         <cursorShape>ArrowCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #4C4C4C; /*#004100;*/color: #bbbbbb;background-color:transparent</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QComboBox" name="comboBox">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="tabletTracking">
+           <bool>false</bool>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+          <property name="currentText">
+           <string/>
+          </property>
+          <property name="currentIndex">
+           <number>-1</number>
+          </property>
+          <property name="insertPolicy">
+           <enum>QComboBox::NoInsert</enum>
+          </property>
+          <item>
+           <property name="text">
+            <string>大家好，很高兴见到各位！</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>快点吧，我等到花儿也谢了。</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>你的牌打得太好了！</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>我们交个朋友吧，能告诉我你的联系方法吗？</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>各位，真不好意思，我要离开一会。</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>又断线了，网络怎么这么差啊！</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>不要吵了，有什么好吵的，专心玩游戏吧。</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>你是MM，还是GG？</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>下次再玩吧，我要走了。</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>再见了，我会想念大家的。</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>和你合作真是太愉快啦。</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>不要走，决战到天亮。</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>发送</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <zorder>label_2</zorder>
+  <zorder>lcdNumber</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>label</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>label_11</zorder>
+  <zorder>label_3</zorder>
+  <zorder>line</zorder>
+  <zorder>line_2</zorder>
+  <zorder>line_3</zorder>
+  <zorder>line_4</zorder>
+  <zorder>label_4</zorder>
+  <zorder>line_5</zorder>
+  <zorder>line_6</zorder>
+  <zorder>label_5</zorder>
+  <zorder>line_7</zorder>
+  <zorder>label_12</zorder>
+  <zorder>line_8</zorder>
+  <zorder>lcdNumber_2</zorder>
+  <zorder>label_7</zorder>
+  <zorder>label_8</zorder>
  </widget>
  <resources/>
  <connections/>

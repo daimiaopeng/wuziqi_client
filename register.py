@@ -5,7 +5,7 @@ from PyQt5.QtCore import *
 import register_ui
 import base_pb2
 import random
-
+import hashlib
 
 class Register(QWidget, register_ui.Ui_Form):
     def __init__(self, _login, parent=None):
@@ -36,6 +36,8 @@ class Register(QWidget, register_ui.Ui_Form):
             return
         if client_register.username == "" and client_register.passwd == "" and client_register.nicheng == "" and client_register.email == "":
             QMessageBox.warning(self, '警告', '还有信息未填', QMessageBox.Ok)
+
+        client_register.passwd = hashlib.md5(client_register.passwd.encode(encoding='UTF-8')).hexdigest()
         self._login.writeData(client_register.SerializeToString())
 
     def quit(self):
