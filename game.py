@@ -3,7 +3,6 @@ import time
 import base_pb2
 import setting
 import main_ui
-import base64
 from chessman import *
 from PyQt5.Qt import QProgressDialog
 
@@ -59,7 +58,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.time.timeout.connect(self.refresh)
 
     def init(self):
-        self.setWindowTitle("双人联机")
+        self.setWindowTitle("网络五子棋")
         # 设置窗口图标
         self.setWindowIcon(QIcon("source/icon.ico"))
         # 设置窗口大小
@@ -603,7 +602,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         c_m.time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         c_m.data = self.comboBox.lineEdit().text()
         s = '<font color="#6497ed">我 %s </font> <br><font color="#ffa500">%s</font>' % (
-        c_m.time, self.comboBox.lineEdit().text())
+            c_m.time, self.comboBox.lineEdit().text())
         self.insertChatMessage(s)
         self.writeData(c_m.SerializeToString())
 
