@@ -43,6 +43,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.history = []
         self.history2 = []
         self.is_over = False
+        self.ai = False
         self.lbl = None
         self.isMatch = False
         self.init()
@@ -58,7 +59,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.time.timeout.connect(self.refresh)
 
     def init(self):
-        self.setWindowTitle("网络五子棋")
+        self.setWindowTitle("网络五子棋 v1.1")
         # 设置窗口图标
         self.setWindowIcon(QIcon("source/icon.ico"))
         # 设置窗口大小
@@ -70,6 +71,10 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.pushButton_5.clicked.connect(self.wantToLose)
         self.pushButton_3.clicked.connect(self.draw)
         self.pushButton_6.clicked.connect(self.setUp)
+        self.fontText = QFont("Microsoft YaHei", 10, 75)
+        self.label_3.setFont(self.fontText)
+        self.label_4.setFont(self.fontText)
+        self.pushButton_7.clicked.connect(self.aiBegin)
         self.focusPoint = QLabel(self)
         self.focusPoint.setPixmap(QPixmap("source/标识.png"))
         self.pushButton.setShortcut(QKeySequence(Qt.Key_Enter))
@@ -83,10 +88,16 @@ class PlayGame(QWidget, main_ui.Ui_Form):
 
     def initBeginGame(self):
         if self.isBeginGame:
-            self.pushButton_2.setEnabled(True)
-            self.pushButton_3.setEnabled(True)
             self.pushButton_5.setEnabled(True)
             self.pushButton_4.setEnabled(False)
+            self.pushButton_7.setEnabled(False)
+            if self.ai == True:
+                self.pushButton_3.setEnabled(False)
+                self.pushButton_3.setEnabled(False)
+            else:
+                self.pushButton_3.setEnabled(True)
+                self.pushButton_2.setEnabled(True)
+
             self.time.start()
             self.reStart()
             if self.myColor == 'black':
@@ -108,10 +119,12 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             self.pushButton_3.setEnabled(False)
             self.pushButton_4.setEnabled(True)
             self.pushButton_5.setEnabled(False)
+            self.pushButton_7.setEnabled(True)
         if self.isCanXia:
             self.label.setCursor(QCursor(Qt.PointingHandCursor))
         else:
             self.label.setCursor(QCursor(Qt.ForbiddenCursor))
+
         self.endDate = QDateTime.currentMSecsSinceEpoch() + 1000 * 60 * 10
         self.endDateOther = self.endDate
 
@@ -171,8 +184,8 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.writeData(s_g_p.SerializeToString())
         self.isCanXia = False
         self.label.setCursor(QCursor(Qt.ForbiddenCursor))
-        # 自动落子
-        # self.autoDown()
+        if self.ai == True:
+            self.autoDown()
 
     # 坐标转换
     def reversePos(self, a0: QtCore.QPoint):
@@ -282,6 +295,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         self.isBeginGame = False
         self.isCanXia = False
         self.isMatch = False
+        self.ai = False
         self.initBeginGame()
         self.time.stop()
 
@@ -471,7 +485,6 @@ class PlayGame(QWidget, main_ui.Ui_Form):
         """ % (
             s_u_i.name, s_u_i.integral, s_u_i.level, s_u_i.numsGame, s_u_i.gameCurrency, s_u_i.win, s_u_i.lose,
             s_u_i.draw)
-        print(s)
         img_src = r'source\avatar\%s.png' % s_u_i.avatar
         img = QPixmap(img_src)
         if s_u_i.code == 1:
@@ -485,7 +498,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             self.label_12.setScaledContents(True)
             self.label_4.setText(s)
 
-    def cmd15(self, data):
+    def cmd15(self, data):  # 和棋
         w_w = base_pb2.whoWin()
         w_w.ParseFromString(data)
         if w_w.code == 2:
@@ -506,7 +519,7 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             if reply == QMessageBox.Yes:
                 return
 
-    def cmd16(self, data):
+    def cmd16(self, data):  # 悔棋
         w_d = base_pb2.withDraw()
         w_d.ParseFromString(data)
         requestRes = base_pb2.responseResources()
@@ -624,3 +637,237 @@ class PlayGame(QWidget, main_ui.Ui_Form):
             self.isCloseChat = False
             s = '<font color=#FF0000>您已取消消息屏蔽功能</font>'
         self.insertChatMessage(s)
+
+    def getPoint(self):
+        '''
+        返回落子位置
+        :return:
+        '''
+        # 简单实现：返回一个空白交点
+        # for i in range(19):
+        #     for j in range(19):
+        #         if self.chessboard[i][j] == None:
+        #             return QPoint(j, i)
+        #
+        #  没有找到合适的点
+        white_score = [[0 for i in range(15)] for j in range(15)]
+        black_score = [[0 for i in range(15)] for j in range(15)]
+
+        for i in range(15):
+            for j in range(15):
+                if self.chessboard[i][j] != None:
+                    continue
+                # 模拟落子
+                self.chessboard[i][j] = Chessman(color='white', parent=self)
+                white_score[i][j] = self.getPointScore(j, i, 'white')
+                self.chessboard[i][j].close()
+                self.chessboard[i][j] = None
+                self.chessboard[i][j] = Chessman(color='black', parent=self)
+                black_score[i][j] = self.getPointScore(j, i, 'black')
+                self.chessboard[i][j].close()
+                self.chessboard[i][j] = None
+        # 将二维坐标转换成以为进行计算
+        r_white_score = []
+        r_black_score = []
+        for i in white_score:
+            r_white_score.extend(i)
+        for i in black_score:
+            r_black_score.extend(i)
+
+        # 找到分数最大值
+        score = [max(x, y) for x, y in zip(r_white_score, r_black_score)]
+
+        # 找到分数做大的下标
+        chess_index = score.index(max(score))
+
+        # print(score, '\n', max(score))
+
+        y = chess_index // 15
+        x = chess_index % 15
+
+        return QPoint(x, y)
+
+    def aiBegin(self):
+        self.isBeginGame = True
+        self.isCanXia = True
+        self.myColor = "black"
+        self.ai = True
+        self.initBeginGame()
+        s_u_i = base_pb2.server_user_infor()
+        s_u_i.code = 2
+        s_u_i.name, s_u_i.integral, s_u_i.level, s_u_i.numsGame, s_u_i.gameCurrency, s_u_i.win, s_u_i.lose, s_u_i.draw, s_u_i.avatar = (
+            '电脑', 9999, 9999, 9999, 9999, 9999, 0, 0, '1')
+        self.cmd14(s_u_i.SerializeToString())
+
+    def autoDown(self):
+        point = self.getPoint()
+        s_g_p = base_pb2.server_gobang_position()
+        s_g_p.x = point.x()
+        s_g_p.y = point.y()
+        self.cmd7(s_g_p.SerializeToString())
+
+    def getPointScore(self, x, y, color):
+        '''
+        返回每个点的得分
+        y:行坐标
+        x:列坐标
+        color：棋子颜色
+        :return:
+        '''
+        # 分别计算点周围5子以内，空白、和同色的分数
+        blank_score = 0
+        color_score = 0
+
+        # 记录每个方向的棋子分数
+        blank_score_plus = [0, 0, 0, 0]  # 横向 纵向 正斜线 反斜线
+        color_score_plus = [0, 0, 0, 0]
+
+        # 横线
+        # 右侧
+        i = x  # 横坐标
+        j = y  # 纵坐标
+        while i < 19:
+            if self.chessboard[j][i] is None:
+                blank_score += 1
+                blank_score_plus[0] += 1
+                break
+            elif self.chessboard[j][i].color == color:
+                color_score += 1
+                color_score_plus[0] += 1
+            else:
+                break
+            if i >= x + 4:
+                break
+            i += 1
+        # print('123123')
+        # 左侧
+        i = x  # 横坐标
+        j = y  # 纵坐标
+        while i >= 0:
+            if self.chessboard[j][i] is None:
+                blank_score += 1
+                blank_score_plus[0] += 1
+                break
+            elif self.chessboard[j][i].color == color:
+                color_score += 1
+                color_score_plus[0] += 1
+            else:
+                break
+            if i <= x - 4:
+                break
+            i -= 1
+
+        # 竖线
+        # 上方
+        i = x  # 横坐标
+        j = y  # 纵坐标
+        while j >= 0:
+            if self.chessboard[j][i] is None:
+                blank_score += 1
+                blank_score_plus[1] += 1
+                break
+            elif self.chessboard[j][i].color == color:
+                color_score += 1
+                color_score_plus[1] += 1
+            else:
+                break
+            if j <= y - 4:
+                break
+            j -= 1
+        # 竖线
+        # 下方
+        i = x  # 横坐标
+        j = y  # 纵坐标
+        while j < 19:
+            if self.chessboard[j][i] is None:
+                blank_score += 1
+                blank_score_plus[1] += 1
+                break
+            elif self.chessboard[j][i].color == color:
+                color_score += 1
+                color_score_plus[1] += 1
+            else:
+                break
+
+            if j >= y + 4:  # 最近五个点
+                break
+            j += 1
+        # 正斜线
+        # 右上
+        i = x
+        j = y
+        while i < 19 and j >= 0:
+            if self.chessboard[j][i] is None:
+                blank_score += 1
+                blank_score_plus[2] += 1
+                break
+            elif self.chessboard[j][i].color == color:
+                color_score += 1
+                color_score_plus[2] += 1
+            else:
+                break
+
+            if i >= x + 4:  # 最近五个点
+                break
+            i += 1
+            j -= 1
+        # 左下
+        i = x
+        j = y
+        while j < 19 and i >= 0:
+            if self.chessboard[j][i] is None:
+                blank_score += 1
+                blank_score_plus[2] += 1
+                break
+            elif self.chessboard[j][i].color == color:
+                color_score += 1
+                color_score_plus[2] += 1
+            else:
+                break
+
+            if j >= y + 4:  # 最近五个点
+                break
+            i -= 1
+            j += 1
+        # 反斜线
+        # 左上
+        i = x
+        j = y
+        while i >= 0 and j >= 0:
+            if self.chessboard[j][i] is None:
+                blank_score += 1
+                blank_score_plus[3] += 1
+                break
+            elif self.chessboard[j][i].color == color:
+                color_score += 1
+                color_score_plus[3] += 1
+            else:
+                break
+            if i <= x - 4:
+                break
+            i -= 1
+            j -= 1
+        # 右上
+        i = x
+        j = y
+        while i < 19 and j < 19:
+            if self.chessboard[j][i] is None:
+                blank_score += 1
+                blank_score_plus[3] += 1
+                break
+            elif self.chessboard[j][i].color == color:
+                color_score += 1
+                color_score_plus[3] += 1
+            else:
+                break
+            if i >= x + 4:
+                break
+            i += 1
+            j += 1
+
+        for k in range(4):
+            if color_score_plus[k] >= 5:
+                return 100
+
+        # color_score *= 5
+        return max([x + y for x, y in zip(color_score_plus, blank_score_plus)])

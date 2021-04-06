@@ -49,7 +49,6 @@ class MyWindow(QMainWindow, login_ui.Ui_MainWindow):
             3: self.cmd3,
             5: self.cmd5,
         }
-
     def login(self):
         self.client_login = base_pb2.client_login()
         self.client_login.cmd = 2
